@@ -1,16 +1,11 @@
 
-import { useState, useEffect } from "react";
-import { ArrowDown, Github, Linkedin, Mail, ExternalLink, Code, Palette, Zap } from "lucide-react";
+import { Code, Palette, Zap, ExternalLink, Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import Navigation from "@/components/Navigation";
+import HeroSection from "@/components/HeroSection";
 
 const Index = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  useEffect(() => {
-    setIsVisible(true);
-  }, []);
-
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -54,49 +49,11 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Hero Section */}
-      <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-r from-violet-600/20 via-purple-600/20 to-cyan-600/20 animate-gradient-shift bg-[length:200%_200%]"></div>
-        
-        {/* Floating Elements */}
-        <div className="absolute top-20 left-20 w-20 h-20 bg-gradient-to-r from-violet-500 to-purple-500 rounded-full blur-xl animate-float opacity-30"></div>
-        <div className="absolute top-40 right-20 w-32 h-32 bg-gradient-to-r from-cyan-500 to-blue-500 rounded-full blur-xl animate-float opacity-20" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute bottom-40 left-1/4 w-24 h-24 bg-gradient-to-r from-pink-500 to-rose-500 rounded-full blur-xl animate-float opacity-25" style={{ animationDelay: '2s' }}></div>
+      {/* Navigation */}
+      <Navigation />
 
-        <div className={`text-center z-10 px-6 transition-all duration-1000 ${isVisible ? 'animate-fade-in' : 'opacity-0'}`}>
-          <h1 className="text-6xl md:text-8xl font-bold mb-6 gradient-text leading-tight">
-            Creative
-            <br />
-            Developer
-          </h1>
-          <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-2xl mx-auto leading-relaxed">
-            Crafting stunning digital experiences with modern technologies and creative design
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-8 py-4 text-lg animate-glow"
-              onClick={() => scrollToSection('projects')}
-            >
-              View My Work
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 px-8 py-4 text-lg glass"
-              onClick={() => scrollToSection('contact')}
-            >
-              Get In Touch
-            </Button>
-          </div>
-          <button 
-            onClick={() => scrollToSection('about')}
-            className="animate-bounce text-violet-400 hover:text-violet-300 transition-colors"
-          >
-            <ArrowDown size={32} />
-          </button>
-        </div>
-      </section>
+      {/* Hero Section */}
+      <HeroSection onScrollToSection={scrollToSection} />
 
       {/* About Section */}
       <section id="about" className="py-20 px-6">
@@ -114,17 +71,17 @@ const Index = () => {
                 open-source projects, or sharing my knowledge with the developer community.
               </p>
               <div className="flex gap-4">
-                <Button className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700">
+                <Button className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300">
                   Download CV
                 </Button>
-                <Button variant="outline" className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass">
+                <Button variant="outline" className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass transform hover:scale-105 transition-all duration-300">
                   Learn More
                 </Button>
               </div>
             </div>
             <div className="space-y-6">
               {skills.map((skill, index) => (
-                <div key={skill.name} className="glass rounded-lg p-4 glow-box" style={{ animationDelay: `${index * 0.1}s` }}>
+                <div key={skill.name} className="glass rounded-lg p-4 glow-box hover:scale-105 transition-all duration-300" style={{ animationDelay: `${index * 0.1}s` }}>
                   <div className="flex items-center justify-between mb-2">
                     <div className="flex items-center gap-3">
                       <skill.icon className="text-violet-400" size={20} />
@@ -160,10 +117,10 @@ const Index = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                     <div className="flex gap-2">
-                      <Button size="sm" className="bg-violet-600 hover:bg-violet-700">
+                      <Button size="sm" className="bg-violet-600 hover:bg-violet-700 transform hover:scale-110 transition-all duration-200">
                         <ExternalLink size={16} />
                       </Button>
-                      <Button size="sm" variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                      <Button size="sm" variant="outline" className="border-white/30 text-white hover:bg-white/10 transform hover:scale-110 transition-all duration-200">
                         <Github size={16} />
                       </Button>
                     </div>
@@ -174,7 +131,7 @@ const Index = () => {
                   <p className="text-gray-300 mb-4 text-sm leading-relaxed">{project.description}</p>
                   <div className="flex flex-wrap gap-2">
                     {project.tech.map((tech) => (
-                      <span key={tech} className="px-3 py-1 bg-violet-500/20 text-violet-300 rounded-full text-xs font-medium">
+                      <span key={tech} className="px-3 py-1 bg-violet-500/20 text-violet-300 rounded-full text-xs font-medium hover:bg-violet-500/30 transition-colors">
                         {tech}
                       </span>
                     ))}
@@ -194,15 +151,15 @@ const Index = () => {
             Have a project in mind? I'd love to hear about it. Let's create something amazing together.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-            <Button size="lg" className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-8 py-4 text-lg animate-glow">
+            <Button size="lg" className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-8 py-4 text-lg transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-violet-500/25">
               <Mail className="mr-2" size={20} />
               Send Message
             </Button>
             <div className="flex gap-4">
-              <Button variant="outline" size="lg" className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass p-4">
+              <Button variant="outline" size="lg" className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass p-4 transform hover:scale-110 transition-all duration-300">
                 <Github size={24} />
               </Button>
-              <Button variant="outline" size="lg" className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass p-4">
+              <Button variant="outline" size="lg" className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass p-4 transform hover:scale-110 transition-all duration-300">
                 <Linkedin size={24} />
               </Button>
             </div>
@@ -210,10 +167,43 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="py-8 px-6 border-t border-violet-500/30 bg-black/30">
-        <div className="max-w-6xl mx-auto text-center">
-          <p className="text-gray-400">© 2024 Creative Developer. Crafted with ❤️ and code.</p>
+      {/* Enhanced Footer */}
+      <footer className="py-12 px-6 border-t border-violet-500/30 bg-black/30">
+        <div className="max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-3 gap-8 text-center md:text-left">
+            <div>
+              <h3 className="text-xl font-bold gradient-text mb-4">Let's Connect</h3>
+              <div className="flex justify-center md:justify-start gap-4">
+                <Button variant="ghost" size="sm" className="text-gray-400 hover:text-violet-400 p-2">
+                  <Github size={20} />
+                </Button>
+                <Button variant="ghost" size="sm" className="text-gray-400 hover:text-violet-400 p-2">
+                  <Linkedin size={20} />
+                </Button>
+                <Button variant="ghost" size="sm" className="text-gray-400 hover:text-violet-400 p-2">
+                  <Mail size={20} />
+                </Button>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-4">Quick Links</h3>
+              <div className="space-y-2">
+                <button onClick={() => scrollToSection('about')} className="block text-gray-400 hover:text-violet-400 transition-colors">About</button>
+                <button onClick={() => scrollToSection('projects')} className="block text-gray-400 hover:text-violet-400 transition-colors">Projects</button>
+                <button onClick={() => scrollToSection('contact')} className="block text-gray-400 hover:text-violet-400 transition-colors">Contact</button>
+              </div>
+            </div>
+            <div>
+              <h3 className="text-lg font-semibold text-white mb-4">Get In Touch</h3>
+              <p className="text-gray-400 text-sm">
+                Ready to bring your ideas to life?<br />
+                Let's create something extraordinary together.
+              </p>
+            </div>
+          </div>
+          <div className="border-t border-violet-500/20 mt-8 pt-8 text-center">
+            <p className="text-gray-400">© 2024 John Doe. Crafted with ❤️ and code.</p>
+          </div>
         </div>
       </footer>
     </div>
