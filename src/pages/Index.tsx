@@ -1,3 +1,4 @@
+
 import { Code, Palette, Zap, ExternalLink, Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -36,7 +37,7 @@ const Index = () => {
     {
       title: "EcoStep",
       description: "A comprehensive carbon footprint tracker helping users monitor and reduce their environmental impact through daily activity tracking",
-      image: "https://images.unsplash.com/photo-1569163139394-de4e4f43e4e3?w=500&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1569163139394-de4e4f43e4e3?w=500&h=300&fit=crop&auto=format",
       tech: ["React", "Node.js", "Chart.js", "MongoDB"],
       liveUrl: "#",
       githubUrl: "#"
@@ -44,7 +45,7 @@ const Index = () => {
     {
       title: "PointMate",
       description: "An intelligent AICTEE point management system that helps students track and optimize their academic performance",
-      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&h=300&fit=crop&auto=format",
       tech: ["React", "TypeScript", "Firebase", "Material-UI"],
       liveUrl: "#",
       githubUrl: "#"
@@ -52,7 +53,7 @@ const Index = () => {
     {
       title: "Task Manager",
       description: "A modern task management application with real-time updates, priority sorting, and collaborative features",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=500&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=500&h=300&fit=crop&auto=format",
       tech: ["React", "Redux", "Express", "PostgreSQL"],
       liveUrl: "#",
       githubUrl: "#"
@@ -60,7 +61,7 @@ const Index = () => {
     {
       title: "Price Tracker",
       description: "An automated price monitoring tool that tracks product prices across multiple platforms and sends alerts for price drops",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop",
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop&auto=format",
       tech: ["Python", "React", "Web Scraping", "SQLite"],
       liveUrl: "#",
       githubUrl: "#"
@@ -82,13 +83,19 @@ const Index = () => {
           <div className="grid md:grid-cols-2 gap-12 items-center">
             <div className="animate-slide-in-left">
               <p className="text-lg text-gray-300 mb-6 leading-relaxed">
-                I'm a passionate full-stack developer with over 5 years of experience creating 
-                beautiful, functional, and user-centered digital experiences. I love turning 
-                complex problems into simple, beautiful solutions.
+                Hi, I'm Ruhi Naaz, a passionate full-stack developer with a love for creating 
+                innovative digital solutions. I specialize in building user-centered applications 
+                that make a real impact, from environmental tracking tools to academic management systems.
+              </p>
+              <p className="text-lg text-gray-300 mb-6 leading-relaxed">
+                My journey in tech has led me to work on diverse projects like EcoStep (carbon footprint tracker), 
+                PointMate (AICTEE point management), and various web applications using modern technologies 
+                like React, TypeScript, and Node.js.
               </p>
               <p className="text-lg text-gray-300 mb-8 leading-relaxed">
                 When I'm not coding, you'll find me exploring new technologies, contributing to 
-                open-source projects, or sharing my knowledge with the developer community.
+                open-source projects, or brainstorming ways to solve everyday problems through technology.
+                I believe in writing clean, maintainable code and creating intuitive user experiences.
               </p>
               <div className="flex gap-4">
                 <Button 
@@ -141,6 +148,10 @@ const Index = () => {
                     src={project.image} 
                     alt={project.title}
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
+                    onError={(e) => {
+                      console.log(`Failed to load image for ${project.title}:`, project.image);
+                      e.currentTarget.src = "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=500&h=300&fit=crop&auto=format";
+                    }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                     <div className="flex gap-2">
