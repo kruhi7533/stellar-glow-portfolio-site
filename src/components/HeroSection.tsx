@@ -15,6 +15,15 @@ const HeroSection = ({ onScrollToSection }: HeroSectionProps) => {
     setIsVisible(true);
   }, []);
 
+  const handleDownloadCV = () => {
+    // For now, we'll create a simple alert. You can replace this with actual CV download logic
+    alert('CV download feature coming soon! Please contact kruhi7533@gmail.com for my resume.');
+  };
+
+  const handleLearnMore = () => {
+    onScrollToSection('about');
+  };
+
   return (
     <section className="min-h-screen flex items-center justify-center relative overflow-hidden pt-20">
       {/* Background Patterns */}
@@ -37,13 +46,13 @@ const HeroSection = ({ onScrollToSection }: HeroSectionProps) => {
         <div className="flex justify-center mb-8">
           <Avatar className="w-32 h-32 ring-4 ring-violet-500/30 ring-offset-4 ring-offset-transparent">
             <AvatarImage src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face" alt="Profile" />
-            <AvatarFallback className="bg-gradient-to-r from-violet-500 to-purple-500 text-white text-2xl font-bold">JD</AvatarFallback>
+            <AvatarFallback className="bg-gradient-to-r from-violet-500 to-purple-500 text-white text-2xl font-bold">RN</AvatarFallback>
           </Avatar>
         </div>
 
         {/* Personal Introduction */}
         <p className="text-lg md:text-xl text-violet-300 mb-4 font-medium">
-          Hi, I'm John Doe
+          Hi, I'm Ruhi Naaz
         </p>
         
         <h1 className="text-5xl md:text-8xl font-bold mb-6 leading-tight">

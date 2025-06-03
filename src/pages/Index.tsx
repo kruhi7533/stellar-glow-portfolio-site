@@ -1,4 +1,3 @@
-
 import { Code, Palette, Zap, ExternalLink, Github, Linkedin, Mail } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -9,6 +8,19 @@ const Index = () => {
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  const handleDownloadCV = () => {
+    // For now, we'll create a simple alert. You can replace this with actual CV download logic
+    alert('CV download feature coming soon! Please contact kruhi7533@gmail.com for my resume.');
+  };
+
+  const handleLearnMore = () => {
+    scrollToSection('projects');
+  };
+
+  const handleEmailClick = () => {
+    window.location.href = 'mailto:kruhi7533@gmail.com';
   };
 
   const skills = [
@@ -71,10 +83,17 @@ const Index = () => {
                 open-source projects, or sharing my knowledge with the developer community.
               </p>
               <div className="flex gap-4">
-                <Button className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300">
+                <Button 
+                  className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300"
+                  onClick={handleDownloadCV}
+                >
                   Download CV
                 </Button>
-                <Button variant="outline" className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass transform hover:scale-105 transition-all duration-300">
+                <Button 
+                  variant="outline" 
+                  className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass transform hover:scale-105 transition-all duration-300"
+                  onClick={handleLearnMore}
+                >
                   Learn More
                 </Button>
               </div>
@@ -151,15 +170,29 @@ const Index = () => {
             Have a project in mind? I'd love to hear about it. Let's create something amazing together.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-            <Button size="lg" className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-8 py-4 text-lg transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-violet-500/25">
+            <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-8 py-4 text-lg transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-violet-500/25"
+              onClick={handleEmailClick}
+            >
               <Mail className="mr-2" size={20} />
               Send Message
             </Button>
             <div className="flex gap-4">
-              <Button variant="outline" size="lg" className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass p-4 transform hover:scale-110 transition-all duration-300">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass p-4 transform hover:scale-110 transition-all duration-300"
+                onClick={() => window.open('https://github.com/kruhi7533', '_blank')}
+              >
                 <Github size={24} />
               </Button>
-              <Button variant="outline" size="lg" className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass p-4 transform hover:scale-110 transition-all duration-300">
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass p-4 transform hover:scale-110 transition-all duration-300"
+                onClick={() => window.open('https://linkedin.com/in/ruhi-naaz-8b5960274/', '_blank')}
+              >
                 <Linkedin size={24} />
               </Button>
             </div>
@@ -174,13 +207,28 @@ const Index = () => {
             <div>
               <h3 className="text-xl font-bold gradient-text mb-4">Let's Connect</h3>
               <div className="flex justify-center md:justify-start gap-4">
-                <Button variant="ghost" size="sm" className="text-gray-400 hover:text-violet-400 p-2">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-gray-400 hover:text-violet-400 p-2"
+                  onClick={() => window.open('https://github.com/kruhi7533', '_blank')}
+                >
                   <Github size={20} />
                 </Button>
-                <Button variant="ghost" size="sm" className="text-gray-400 hover:text-violet-400 p-2">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-gray-400 hover:text-violet-400 p-2"
+                  onClick={() => window.open('https://linkedin.com/in/ruhi-naaz-8b5960274/', '_blank')}
+                >
                   <Linkedin size={20} />
                 </Button>
-                <Button variant="ghost" size="sm" className="text-gray-400 hover:text-violet-400 p-2">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-gray-400 hover:text-violet-400 p-2"
+                  onClick={handleEmailClick}
+                >
                   <Mail size={20} />
                 </Button>
               </div>
@@ -202,7 +250,7 @@ const Index = () => {
             </div>
           </div>
           <div className="border-t border-violet-500/20 mt-8 pt-8 text-center">
-            <p className="text-gray-400">© 2024 John Doe. Crafted with ❤️ and code.</p>
+            <p className="text-gray-400">© 2024 Ruhi Naaz. Crafted with ❤️ and code.</p>
           </div>
         </div>
       </footer>

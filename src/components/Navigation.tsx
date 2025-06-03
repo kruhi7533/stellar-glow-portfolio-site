@@ -21,6 +21,10 @@ const Navigation = () => {
     setIsMobileMenuOpen(false);
   };
 
+  const handleEmailClick = () => {
+    window.location.href = 'mailto:kruhi7533@gmail.com';
+  };
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled ? 'glass backdrop-blur-lg border-b border-violet-500/20' : 'bg-transparent'
@@ -52,13 +56,28 @@ const Navigation = () => {
             
             {/* Social Links */}
             <div className="flex items-center space-x-3 ml-4">
-              <Button variant="ghost" size="sm" className="text-gray-400 hover:text-violet-400 p-2">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="text-gray-400 hover:text-violet-400 p-2"
+                onClick={() => window.open('https://github.com/kruhi7533', '_blank')}
+              >
                 <Github size={18} />
               </Button>
-              <Button variant="ghost" size="sm" className="text-gray-400 hover:text-violet-400 p-2">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="text-gray-400 hover:text-violet-400 p-2"
+                onClick={() => window.open('https://linkedin.com/in/ruhi-naaz-8b5960274/', '_blank')}
+              >
                 <Linkedin size={18} />
               </Button>
-              <Button variant="ghost" size="sm" className="text-gray-400 hover:text-violet-400 p-2">
+              <Button 
+                variant="ghost" 
+                size="sm" 
+                className="text-gray-400 hover:text-violet-400 p-2"
+                onClick={handleEmailClick}
+              >
                 <Mail size={18} />
               </Button>
             </div>
@@ -99,13 +118,28 @@ const Navigation = () => {
               </button>
               
               <div className="flex items-center space-x-3 pt-2">
-                <Button variant="ghost" size="sm" className="text-gray-400 hover:text-violet-400 p-2">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-gray-400 hover:text-violet-400 p-2"
+                  onClick={() => window.open('https://github.com/kruhi7533', '_blank')}
+                >
                   <Github size={18} />
                 </Button>
-                <Button variant="ghost" size="sm" className="text-gray-400 hover:text-violet-400 p-2">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-gray-400 hover:text-violet-400 p-2"
+                  onClick={() => window.open('https://linkedin.com/in/ruhi-naaz-8b5960274/', '_blank')}
+                >
                   <Linkedin size={18} />
                 </Button>
-                <Button variant="ghost" size="sm" className="text-gray-400 hover:text-violet-400 p-2">
+                <Button 
+                  variant="ghost" 
+                  size="sm" 
+                  className="text-gray-400 hover:text-violet-400 p-2"
+                  onClick={handleEmailClick}
+                >
                   <Mail size={18} />
                 </Button>
               </div>
