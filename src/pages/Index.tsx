@@ -34,26 +34,34 @@ const Index = () => {
 
   const projects = [
     {
-      title: "E-Commerce Platform",
-      description: "A full-stack e-commerce solution with React, Node.js, and Stripe integration",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop",
-      tech: ["React", "Node.js", "MongoDB", "Stripe"],
+      title: "EcoStep",
+      description: "A comprehensive carbon footprint tracker helping users monitor and reduce their environmental impact through daily activity tracking",
+      image: "https://images.unsplash.com/photo-1569163139394-de4e4f43e4e3?w=500&h=300&fit=crop",
+      tech: ["React", "Node.js", "Chart.js", "MongoDB"],
       liveUrl: "#",
       githubUrl: "#"
     },
     {
-      title: "Task Management App",
-      description: "A collaborative task management tool with real-time updates and team features",
+      title: "PointMate",
+      description: "An intelligent AICTEE point management system that helps students track and optimize their academic performance",
+      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&h=300&fit=crop",
+      tech: ["React", "TypeScript", "Firebase", "Material-UI"],
+      liveUrl: "#",
+      githubUrl: "#"
+    },
+    {
+      title: "Task Manager",
+      description: "A modern task management application with real-time updates, priority sorting, and collaborative features",
       image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=500&h=300&fit=crop",
-      tech: ["React", "TypeScript", "Socket.io", "Express"],
+      tech: ["React", "Redux", "Express", "PostgreSQL"],
       liveUrl: "#",
       githubUrl: "#"
     },
     {
-      title: "AI Image Generator",
-      description: "An AI-powered image generation app using OpenAI's DALL-E API",
-      image: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=500&h=300&fit=crop",
-      tech: ["React", "OpenAI API", "Tailwind", "Vercel"],
+      title: "Price Tracker",
+      description: "An automated price monitoring tool that tracks product prices across multiple platforms and sends alerts for price drops",
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop",
+      tech: ["Python", "React", "Web Scraping", "SQLite"],
       liveUrl: "#",
       githubUrl: "#"
     }
