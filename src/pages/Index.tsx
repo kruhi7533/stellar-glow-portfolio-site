@@ -1,4 +1,4 @@
-import { Code, Palette, Zap, ExternalLink, Github, Linkedin, Mail, Database, Monitor, Wrench } from "lucide-react";
+import { Code, Palette, Zap, ExternalLink, Github, Linkedin, Mail, Database, Monitor, Wrench, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -13,8 +13,14 @@ const Index = () => {
   };
 
   const handleDownloadCV = () => {
-    // For now, we'll create a simple alert. You can replace this with actual CV download logic
-    alert('CV download feature coming soon! Please contact kruhi7533@gmail.com for my resume.');
+    // Create a temporary link to trigger download
+    const link = document.createElement('a');
+    link.href = '/RuhiNaaz_CV.pdf'; // Path to your CV in the public directory
+    link.download = 'RuhiNaaz_CV.pdf';
+    link.setAttribute('aria-label', 'Download Ruhi Naaz CV');
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
 
   const handleLearnMore = () => {
@@ -124,12 +130,15 @@ const Index = () => {
                 I believe in writing clean, maintainable code and creating intuitive user experiences.
               </p>
               <div className="flex gap-4">
-                <Button 
-                  className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 transform hover:scale-105 transition-all duration-300"
-                  onClick={handleDownloadCV}
+                <a 
+                  href="/RuhiNaaz_CV.pdf" 
+                  download="RuhiNaaz_CV.pdf"
+                  aria-label="Download Ruhi Naaz CV"
+                  className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-violet-500/25 focus:ring-4 focus:ring-violet-500/50"
                 >
+                  <Download size={20} />
                   Download CV
-                </Button>
+                </a>
                 <Button 
                   variant="outline" 
                   className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass transform hover:scale-105 transition-all duration-300"
