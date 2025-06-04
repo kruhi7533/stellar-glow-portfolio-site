@@ -1,7 +1,9 @@
 
-import { Code, Palette, Zap, ExternalLink, Github, Linkedin, Mail } from "lucide-react";
+import { Code, Palette, Zap, ExternalLink, Github, Linkedin, Mail, Database, Monitor, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 
@@ -24,20 +26,29 @@ const Index = () => {
     window.location.href = 'mailto:kruhi7533@gmail.com';
   };
 
-  const skills = [
-    { name: "React", level: 90, icon: Code },
-    { name: "TypeScript", level: 85, icon: Code },
-    { name: "Node.js", level: 80, icon: Code },
-    { name: "UI/UX Design", level: 88, icon: Palette },
-    { name: "Next.js", level: 82, icon: Zap },
-    { name: "Tailwind CSS", level: 92, icon: Palette }
-  ];
+  // Organized skills by category
+  const skillCategories = {
+    frontend: [
+      { name: "React", level: 90, icon: Code, description: "Building dynamic and interactive user interfaces" },
+      { name: "TypeScript", level: 85, icon: Code, description: "Type-safe JavaScript development" },
+      { name: "Tailwind CSS", level: 92, icon: Palette, description: "Utility-first CSS framework for rapid UI development" },
+      { name: "UI/UX Design", level: 88, icon: Palette, description: "Creating intuitive and beautiful user experiences" }
+    ],
+    backend: [
+      { name: "Node.js", level: 80, icon: Database, description: "Server-side JavaScript runtime environment" },
+      { name: "Next.js", level: 82, icon: Zap, description: "Full-stack React framework with SSR capabilities" }
+    ],
+    tools: [
+      { name: "Git", level: 88, icon: Wrench, description: "Version control and collaborative development" },
+      { name: "VS Code", level: 95, icon: Monitor, description: "Primary development environment" }
+    ]
+  };
 
   const projects = [
     {
       title: "EcoStep",
       description: "A comprehensive carbon footprint tracker helping users monitor and reduce their environmental impact through daily activity tracking",
-      image: "https://images.unsplash.com/photo-1569163139394-de4e4f43e4e3?w=500&h=300&fit=crop&auto=format",
+      image: "https://images.unsplash.com/photo-1569163139394-de4e4f43e4e3?w=500&h=300&fit=crop&auto=format&q=80",
       tech: ["React", "Node.js", "Chart.js", "MongoDB"],
       liveUrl: "#",
       githubUrl: "#"
@@ -45,7 +56,7 @@ const Index = () => {
     {
       title: "PointMate",
       description: "An intelligent AICTEE point management system that helps students track and optimize their academic performance",
-      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&h=300&fit=crop&auto=format",
+      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&h=300&fit=crop&auto=format&q=80",
       tech: ["React", "TypeScript", "Firebase", "Material-UI"],
       liveUrl: "#",
       githubUrl: "#"
@@ -53,7 +64,7 @@ const Index = () => {
     {
       title: "Task Manager",
       description: "A modern task management application with real-time updates, priority sorting, and collaborative features",
-      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=500&h=300&fit=crop&auto=format",
+      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=500&h=300&fit=crop&auto=format&q=80",
       tech: ["React", "Redux", "Express", "PostgreSQL"],
       liveUrl: "#",
       githubUrl: "#"
@@ -61,12 +72,41 @@ const Index = () => {
     {
       title: "Price Tracker",
       description: "An automated price monitoring tool that tracks product prices across multiple platforms and sends alerts for price drops",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop&auto=format",
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop&auto=format&q=80",
       tech: ["Python", "React", "Web Scraping", "SQLite"],
       liveUrl: "#",
       githubUrl: "#"
     }
   ];
+
+  const SkillCard = ({ skill, category }: { skill: any, category: string }) => (
+    <TooltipProvider>
+      <Tooltip>
+        <TooltipTrigger asChild>
+          <div className="glass rounded-lg p-4 glow-box hover:scale-105 transition-all duration-300 cursor-help">
+            <div className="flex items-center justify-between mb-2">
+              <div className="flex items-center gap-3">
+                <skill.icon className="text-violet-400" size={20} />
+                <span className="text-white font-medium">{skill.name}</span>
+              </div>
+              <Badge variant="outline" className="text-violet-400 border-violet-400/50">
+                {skill.level}%
+              </Badge>
+            </div>
+            <div className="w-full bg-gray-700 rounded-full h-2">
+              <div 
+                className="bg-gradient-to-r from-violet-500 to-purple-500 h-2 rounded-full transition-all duration-1000 ease-out"
+                style={{ width: `${skill.level}%` }}
+              ></div>
+            </div>
+          </div>
+        </TooltipTrigger>
+        <TooltipContent className="max-w-xs">
+          <p>{skill.description}</p>
+        </TooltipContent>
+      </Tooltip>
+    </TooltipProvider>
+  );
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
@@ -80,7 +120,7 @@ const Index = () => {
       <section id="about" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text">About Me</h2>
-          <div className="grid md:grid-cols-2 gap-12 items-center">
+          <div className="grid md:grid-cols-2 gap-12 items-start">
             <div className="animate-slide-in-left">
               <p className="text-lg text-gray-300 mb-6 leading-relaxed">
                 Hi, I'm Ruhi Naaz, a passionate full-stack developer with a love for creating 
@@ -113,24 +153,53 @@ const Index = () => {
                 </Button>
               </div>
             </div>
-            <div className="space-y-6">
-              {skills.map((skill, index) => (
-                <div key={skill.name} className="glass rounded-lg p-4 glow-box hover:scale-105 transition-all duration-300" style={{ animationDelay: `${index * 0.1}s` }}>
-                  <div className="flex items-center justify-between mb-2">
-                    <div className="flex items-center gap-3">
-                      <skill.icon className="text-violet-400" size={20} />
-                      <span className="text-white font-medium">{skill.name}</span>
+            
+            {/* Enhanced Skills Display with Categories */}
+            <div className="space-y-8">
+              {/* Frontend Skills */}
+              <div>
+                <h3 className="text-xl font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                  <Monitor size={20} />
+                  Frontend Development
+                </h3>
+                <div className="space-y-4">
+                  {skillCategories.frontend.map((skill, index) => (
+                    <div key={skill.name} style={{ animationDelay: `${index * 0.1}s` }}>
+                      <SkillCard skill={skill} category="frontend" />
                     </div>
-                    <span className="text-violet-400 font-mono">{skill.level}%</span>
-                  </div>
-                  <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div 
-                      className="bg-gradient-to-r from-violet-500 to-purple-500 h-2 rounded-full transition-all duration-1000 ease-out"
-                      style={{ width: `${skill.level}%` }}
-                    ></div>
-                  </div>
+                  ))}
                 </div>
-              ))}
+              </div>
+
+              {/* Backend Skills */}
+              <div>
+                <h3 className="text-xl font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                  <Database size={20} />
+                  Backend Development
+                </h3>
+                <div className="space-y-4">
+                  {skillCategories.backend.map((skill, index) => (
+                    <div key={skill.name} style={{ animationDelay: `${(index + 4) * 0.1}s` }}>
+                      <SkillCard skill={skill} category="backend" />
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Tools */}
+              <div>
+                <h3 className="text-xl font-semibold text-violet-300 mb-4 flex items-center gap-2">
+                  <Wrench size={20} />
+                  Tools & Technologies
+                </h3>
+                <div className="space-y-4">
+                  {skillCategories.tools.map((skill, index) => (
+                    <div key={skill.name} style={{ animationDelay: `${(index + 6) * 0.1}s` }}>
+                      <SkillCard skill={skill} category="tools" />
+                    </div>
+                  ))}
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -150,7 +219,7 @@ const Index = () => {
                     className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-300"
                     onError={(e) => {
                       console.log(`Failed to load image for ${project.title}:`, project.image);
-                      e.currentTarget.src = "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=500&h=300&fit=crop&auto=format";
+                      e.currentTarget.src = "https://images.unsplash.com/photo-1518186285589-2f7649de83e0?w=500&h=300&fit=crop&auto=format&q=80";
                     }}
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
