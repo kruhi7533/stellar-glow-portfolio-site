@@ -1,4 +1,3 @@
-
 import { Code, Palette, Zap, ExternalLink, Github, Linkedin, Mail, Database, Monitor, Wrench } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -26,21 +25,21 @@ const Index = () => {
     window.location.href = 'mailto:kruhi7533@gmail.com';
   };
 
-  // Organized skills by category
+  // Organized skills by category with descriptions
   const skillCategories = {
     frontend: [
-      { name: "React", level: 90, icon: Code, description: "Building dynamic and interactive user interfaces" },
-      { name: "TypeScript", level: 85, icon: Code, description: "Type-safe JavaScript development" },
-      { name: "Tailwind CSS", level: 92, icon: Palette, description: "Utility-first CSS framework for rapid UI development" },
-      { name: "UI/UX Design", level: 88, icon: Palette, description: "Creating intuitive and beautiful user experiences" }
+      { name: "React", icon: Code, description: "Building dynamic and interactive user interfaces since 2021" },
+      { name: "TypeScript", icon: Code, description: "Type-safe JavaScript development for robust applications" },
+      { name: "Tailwind CSS", icon: Palette, description: "Utility-first CSS framework for rapid UI development" },
+      { name: "UI/UX Design", icon: Palette, description: "Creating intuitive and beautiful user experiences" }
     ],
     backend: [
-      { name: "Node.js", level: 80, icon: Database, description: "Server-side JavaScript runtime environment" },
-      { name: "Next.js", level: 82, icon: Zap, description: "Full-stack React framework with SSR capabilities" }
+      { name: "Node.js", icon: Database, description: "Server-side JavaScript runtime for scalable applications" },
+      { name: "Next.js", icon: Zap, description: "Full-stack React framework with SSR capabilities" }
     ],
     tools: [
-      { name: "Git", level: 88, icon: Wrench, description: "Version control and collaborative development" },
-      { name: "VS Code", level: 95, icon: Monitor, description: "Primary development environment" }
+      { name: "Git", icon: Wrench, description: "Version control and collaborative development workflows" },
+      { name: "VS Code", icon: Monitor, description: "Primary development environment for efficient coding" }
     ]
   };
 
@@ -79,26 +78,13 @@ const Index = () => {
     }
   ];
 
-  const SkillCard = ({ skill, category }: { skill: any, category: string }) => (
+  const SkillBadge = ({ skill }: { skill: any }) => (
     <TooltipProvider>
       <Tooltip>
         <TooltipTrigger asChild>
-          <div className="glass rounded-lg p-4 glow-box hover:scale-105 transition-all duration-300 cursor-help">
-            <div className="flex items-center justify-between mb-2">
-              <div className="flex items-center gap-3">
-                <skill.icon className="text-violet-400" size={20} />
-                <span className="text-white font-medium">{skill.name}</span>
-              </div>
-              <Badge variant="outline" className="text-violet-400 border-violet-400/50">
-                {skill.level}%
-              </Badge>
-            </div>
-            <div className="w-full bg-gray-700 rounded-full h-2">
-              <div 
-                className="bg-gradient-to-r from-violet-500 to-purple-500 h-2 rounded-full transition-all duration-1000 ease-out"
-                style={{ width: `${skill.level}%` }}
-              ></div>
-            </div>
+          <div className="flex items-center gap-2 px-4 py-2 bg-violet-500/10 border border-violet-500/30 rounded-lg hover:bg-violet-500/20 hover:border-violet-400/50 transition-all duration-300 cursor-help group">
+            <skill.icon className="text-violet-400 group-hover:text-violet-300" size={18} />
+            <span className="text-white font-medium">{skill.name}</span>
           </div>
         </TooltipTrigger>
         <TooltipContent className="max-w-xs">
@@ -154,7 +140,7 @@ const Index = () => {
               </div>
             </div>
             
-            {/* Enhanced Skills Display with Categories */}
+            {/* Skills Display with Categories */}
             <div className="space-y-8">
               {/* Frontend Skills */}
               <div>
@@ -162,11 +148,9 @@ const Index = () => {
                   <Monitor size={20} />
                   Frontend Development
                 </h3>
-                <div className="space-y-4">
-                  {skillCategories.frontend.map((skill, index) => (
-                    <div key={skill.name} style={{ animationDelay: `${index * 0.1}s` }}>
-                      <SkillCard skill={skill} category="frontend" />
-                    </div>
+                <div className="flex flex-wrap gap-3">
+                  {skillCategories.frontend.map((skill) => (
+                    <SkillBadge key={skill.name} skill={skill} />
                   ))}
                 </div>
               </div>
@@ -177,11 +161,9 @@ const Index = () => {
                   <Database size={20} />
                   Backend Development
                 </h3>
-                <div className="space-y-4">
-                  {skillCategories.backend.map((skill, index) => (
-                    <div key={skill.name} style={{ animationDelay: `${(index + 4) * 0.1}s` }}>
-                      <SkillCard skill={skill} category="backend" />
-                    </div>
+                <div className="flex flex-wrap gap-3">
+                  {skillCategories.backend.map((skill) => (
+                    <SkillBadge key={skill.name} skill={skill} />
                   ))}
                 </div>
               </div>
@@ -192,11 +174,9 @@ const Index = () => {
                   <Wrench size={20} />
                   Tools & Technologies
                 </h3>
-                <div className="space-y-4">
-                  {skillCategories.tools.map((skill, index) => (
-                    <div key={skill.name} style={{ animationDelay: `${(index + 6) * 0.1}s` }}>
-                      <SkillCard skill={skill} category="tools" />
-                    </div>
+                <div className="flex flex-wrap gap-3">
+                  {skillCategories.tools.map((skill) => (
+                    <SkillBadge key={skill.name} skill={skill} />
                   ))}
                 </div>
               </div>
