@@ -2,11 +2,21 @@ import { Code, Palette, Zap, ExternalLink, Github, Linkedin, Mail, Database, Mon
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import { Input } from "@/components/ui/input";
+import { Textarea } from "@/components/ui/textarea";
+import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
+import { useState } from "react";
 
 const Index = () => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    message: ''
+  });
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
@@ -29,6 +39,21 @@ const Index = () => {
 
   const handleEmailClick = () => {
     window.location.href = 'mailto:kruhi7533@gmail.com';
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    const { name, email, message } = formData;
+    const subject = `Project Inquiry from ${name}`;
+    const body = `Hi Ruhi,\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
+    window.location.href = `mailto:kruhi7533@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFormData(prev => ({
+      ...prev,
+      [e.target.name]: e.target.value
+    }));
   };
 
   // Organized skills by category with descriptions
@@ -241,37 +266,151 @@ const Index = () => {
 
       {/* Contact Section */}
       <section id="contact" className="py-20 px-6">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl md:text-5xl font-bold mb-8 gradient-text">Let's Work Together</h2>
-          <p className="text-xl text-gray-300 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Have a project in mind? I'd love to hear about it. Let's create something amazing together.
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-8 gradient-text">Let's Work Together</h2>
+          <p className="text-xl text-gray-300 mb-12 text-center max-w-2xl mx-auto leading-relaxed">
+            Ready to bring your ideas to life? Let's create something amazing together.
           </p>
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center mb-12">
-            <Button 
-              size="lg" 
-              className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-8 py-4 text-lg transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-violet-500/25"
-              onClick={handleEmailClick}
-            >
-              <Mail className="mr-2" size={20} />
-              Send Message
-            </Button>
-            <div className="flex gap-4">
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass p-4 transform hover:scale-110 transition-all duration-300"
-                onClick={() => window.open('https://github.com/kruhi7533', '_blank')}
-              >
-                <Github size={24} />
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass p-4 transform hover:scale-110 transition-all duration-300"
-                onClick={() => window.open('https://linkedin.com/in/ruhi-naaz-8b5960274/', '_blank')}
-              >
-                <Linkedin size={24} />
-              </Button>
+          
+          <div className="grid md:grid-cols-2 gap-12 items-start">
+            {/* Contact Form */}
+            <div className="space-y-6">
+              <form onSubmit={handleFormSubmit} className="space-y-6">
+                <div className="space-y-2">
+                  <Label htmlFor="name" className="text-violet-300 font-medium">Name</Label>
+                  <Input
+                    id="name"
+                    name="name"
+                    type="text"
+                    placeholder="Your full name"
+                    value={formData.name}
+                    onChange={handleInputChange}
+                    required
+                    className="bg-white/10 border-violet-500/30 text-white placeholder:text-gray-400 focus:border-violet-400 focus:ring-violet-400/50"
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="email" className="text-violet-300 font-medium">Email</Label>
+                  <Input
+                    id="email"
+                    name="email"
+                    type="email"
+                    placeholder="your.email@example.com"
+                    value={formData.email}
+                    onChange={handleInputChange}
+                    required
+                    className="bg-white/10 border-violet-500/30 text-white placeholder:text-gray-400 focus:border-violet-400 focus:ring-violet-400/50"
+                  />
+                </div>
+                
+                <div className="space-y-2">
+                  <Label htmlFor="message" className="text-violet-300 font-medium">Message</Label>
+                  <Textarea
+                    id="message"
+                    name="message"
+                    placeholder="Tell me about your project or how I can help you..."
+                    value={formData.message}
+                    onChange={handleInputChange}
+                    required
+                    rows={5}
+                    className="bg-white/10 border-violet-500/30 text-white placeholder:text-gray-400 focus:border-violet-400 focus:ring-violet-400/50 resize-none"
+                  />
+                </div>
+                
+                <Button 
+                  type="submit"
+                  size="lg" 
+                  className="w-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-8 py-4 text-lg transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-violet-500/25 focus:ring-4 focus:ring-violet-500/50"
+                >
+                  <Mail className="mr-2" size={20} />
+                  Start Your Project
+                </Button>
+              </form>
+              
+              <div className="text-center">
+                <p className="text-gray-400 text-sm mb-2">Or email me directly at</p>
+                <a 
+                  href="mailto:kruhi7533@gmail.com"
+                  className="text-violet-400 hover:text-violet-300 transition-colors font-medium"
+                >
+                  kruhi7533@gmail.com
+                </a>
+                <p className="text-gray-500 text-xs mt-2">✨ Typically replies within 24 hours</p>
+              </div>
+            </div>
+            
+            {/* Social Links */}
+            <div className="flex flex-col items-center justify-center space-y-8">
+              <div className="text-center">
+                <h3 className="text-xl font-semibold text-white mb-4">Connect With Me</h3>
+                <p className="text-gray-400 mb-6">Let's discuss your next project or just say hello!</p>
+              </div>
+              
+              <div className="flex gap-6">
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button 
+                        variant="outline" 
+                        size="lg" 
+                        className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass p-4 transform hover:scale-110 transition-all duration-300"
+                        onClick={() => window.open('https://github.com/kruhi7533', '_blank')}
+                        aria-label="Visit my GitHub profile"
+                      >
+                        <Github size={24} />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>GitHub Profile</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+                
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button 
+                        variant="outline" 
+                        size="lg" 
+                        className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass p-4 transform hover:scale-110 transition-all duration-300"
+                        onClick={() => window.open('https://linkedin.com/in/ruhi-naaz-8b5960274/', '_blank')}
+                        aria-label="Connect with me on LinkedIn"
+                      >
+                        <Linkedin size={24} />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>LinkedIn Profile</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+                
+                <TooltipProvider>
+                  <Tooltip>
+                    <TooltipTrigger asChild>
+                      <Button 
+                        variant="outline" 
+                        size="lg" 
+                        className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass p-4 transform hover:scale-110 transition-all duration-300"
+                        onClick={handleEmailClick}
+                        aria-label="Send me an email"
+                      >
+                        <Mail size={24} />
+                      </Button>
+                    </TooltipTrigger>
+                    <TooltipContent>
+                      <p>Send Email</p>
+                    </TooltipContent>
+                  </Tooltip>
+                </TooltipProvider>
+              </div>
+              
+              <div className="text-center max-w-sm">
+                <p className="text-gray-400 text-sm leading-relaxed">
+                  Trusted by startups and agencies worldwide for delivering high-quality web solutions.
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -289,6 +428,7 @@ const Index = () => {
                   size="sm" 
                   className="text-gray-400 hover:text-violet-400 p-2"
                   onClick={() => window.open('https://github.com/kruhi7533', '_blank')}
+                  aria-label="Visit my GitHub profile"
                 >
                   <Github size={20} />
                 </Button>
@@ -297,6 +437,7 @@ const Index = () => {
                   size="sm" 
                   className="text-gray-400 hover:text-violet-400 p-2"
                   onClick={() => window.open('https://linkedin.com/in/ruhi-naaz-8b5960274/', '_blank')}
+                  aria-label="Connect with me on LinkedIn"
                 >
                   <Linkedin size={20} />
                 </Button>
@@ -305,6 +446,7 @@ const Index = () => {
                   size="sm" 
                   className="text-gray-400 hover:text-violet-400 p-2"
                   onClick={handleEmailClick}
+                  aria-label="Send me an email"
                 >
                   <Mail size={20} />
                 </Button>
