@@ -1,3 +1,4 @@
+
 import { Code, Palette, Zap, ExternalLink, Github, Linkedin, Mail, Database, Monitor, Wrench, Download } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -80,15 +81,7 @@ const Index = () => {
       description: "A comprehensive carbon footprint tracker helping users monitor and reduce their environmental impact through daily activity tracking",
       image: "https://images.unsplash.com/photo-1569163139394-de4e4f43e4e3?w=500&h=300&fit=crop&auto=format&q=80",
       tech: ["React", "Node.js", "Chart.js", "MongoDB"],
-      liveUrl: "#",
-      githubUrl: "#"
-    },
-    {
-      title: "PointMate",
-      description: "An intelligent AICTEE point management system that helps students track and optimize their academic performance",
-      image: "https://images.unsplash.com/photo-1434030216411-0b793f4b4173?w=500&h=300&fit=crop&auto=format&q=80",
-      tech: ["React", "TypeScript", "Firebase", "Material-UI"],
-      liveUrl: "#",
+      liveUrl: "https://carbon-footprint-tracker-plum.vercel.app/",
       githubUrl: "#"
     },
     {
@@ -96,15 +89,31 @@ const Index = () => {
       description: "A modern task management application with real-time updates, priority sorting, and collaborative features",
       image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=500&h=300&fit=crop&auto=format&q=80",
       tech: ["React", "Redux", "Express", "PostgreSQL"],
-      liveUrl: "#",
+      liveUrl: "https://taskmanager-eight-pi.vercel.app/",
       githubUrl: "#"
     },
     {
-      title: "Price Tracker",
-      description: "An automated price monitoring tool that tracks product prices across multiple platforms and sends alerts for price drops",
-      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=500&h=300&fit=crop&auto=format&q=80",
-      tech: ["Python", "React", "Web Scraping", "SQLite"],
-      liveUrl: "#",
+      title: "Sudoku Solver",
+      description: "An intelligent Sudoku puzzle solver with step-by-step visualization and multiple difficulty levels for puzzle enthusiasts",
+      image: "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=500&h=300&fit=crop&auto=format&q=80",
+      tech: ["React", "JavaScript", "CSS3", "Algorithm"],
+      liveUrl: "https://puzzle-logic-master.vercel.app/",
+      githubUrl: "#"
+    },
+    {
+      title: "Pomodoro Timer",
+      description: "A productivity-focused Pomodoro timer with customizable work/break intervals, task tracking, and progress analytics",
+      image: "https://images.unsplash.com/photo-1434494878577-86c23bcb06b9?w=500&h=300&fit=crop&auto=format&q=80",
+      tech: ["React", "TypeScript", "Local Storage", "PWA"],
+      liveUrl: "https://pomodoro-kappa-virid.vercel.app/",
+      githubUrl: "#"
+    },
+    {
+      title: "Tourism Explorer",
+      description: "A comprehensive travel guide platform featuring destination discovery, trip planning, and local recommendations for travelers",
+      image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=500&h=300&fit=crop&auto=format&q=80",
+      tech: ["React", "APIs", "Maps Integration", "Responsive Design"],
+      liveUrl: "https://tourism-three-nu.vercel.app/",
       githubUrl: "#"
     }
   ];
@@ -238,10 +247,21 @@ const Index = () => {
                   />
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
                     <div className="flex gap-2">
-                      <Button size="sm" className="bg-violet-600 hover:bg-violet-700 transform hover:scale-110 transition-all duration-200">
+                      <Button 
+                        size="sm" 
+                        className="bg-violet-600 hover:bg-violet-700 transform hover:scale-110 transition-all duration-200"
+                        onClick={() => window.open(project.liveUrl, '_blank')}
+                        aria-label={`View live demo of ${project.title}`}
+                      >
                         <ExternalLink size={16} />
                       </Button>
-                      <Button size="sm" variant="outline" className="border-white/30 text-white hover:bg-white/10 transform hover:scale-110 transition-all duration-200">
+                      <Button 
+                        size="sm" 
+                        variant="outline" 
+                        className="border-white/30 text-white hover:bg-white/10 transform hover:scale-110 transition-all duration-200"
+                        onClick={() => window.open(project.githubUrl, '_blank')}
+                        aria-label={`View source code of ${project.title}`}
+                      >
                         <Github size={16} />
                       </Button>
                     </div>
