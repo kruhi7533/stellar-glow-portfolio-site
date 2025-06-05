@@ -6,6 +6,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import { useToast } from "@/hooks/use-toast";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import ThemeToggle from "@/components/ThemeToggle";
@@ -14,6 +15,7 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import BlogSection from "@/components/BlogSection";
 import PersonalSection from "@/components/PersonalSection";
 import { useState } from "react";
+import emailjs from '@emailjs/browser';
 
 const Index = () => {
   const [formData, setFormData] = useState({
@@ -21,6 +23,8 @@ const Index = () => {
     email: '',
     message: ''
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const { toast } = useToast();
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -45,12 +49,43 @@ const Index = () => {
     window.location.href = 'mailto:kruhi7533@gmail.com';
   };
 
-  const handleFormSubmit = (e: React.FormEvent) => {
+  const handleFormSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    const { name, email, message } = formData;
-    const subject = `Project Inquiry from ${name}`;
-    const body = `Hi Ruhi,\n\nName: ${name}\nEmail: ${email}\n\nMessage:\n${message}`;
-    window.location.href = `mailto:kruhi7533@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    setIsSubmitting(true);
+
+    try {
+      // Replace these with your actual EmailJS credentials
+      const serviceId = 'YOUR_SERVICE_ID';
+      const templateId = 'YOUR_TEMPLATE_ID';
+      const publicKey = 'YOUR_PUBLIC_KEY';
+
+      const templateParams = {
+        from_name: formData.name,
+        from_email: formData.email,
+        message: formData.message,
+        to_name: 'Ruhi Naaz',
+      };
+
+      await emailjs.send(serviceId, templateId, templateParams, publicKey);
+      
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for your message. I'll get back to you soon.",
+        variant: "default",
+      });
+      
+      // Reset form
+      setFormData({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error('EmailJS error:', error);
+      toast({
+        title: "Failed to send message",
+        description: "There was an error sending your message. Please try again or contact me directly.",
+        variant: "destructive",
+      });
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -248,6 +283,7 @@ const Index = () => {
                     value={formData.name}
                     onChange={handleInputChange}
                     required
+                    disabled={isSubmitting}
                     className="bg-white/10 border-violet-500/30 text-white placeholder:text-gray-400 focus:border-violet-400 focus:ring-violet-400/50"
                   />
                 </div>
@@ -262,6 +298,7 @@ const Index = () => {
                     value={formData.email}
                     onChange={handleInputChange}
                     required
+                    disabled={isSubmitting}
                     className="bg-white/10 border-violet-500/30 text-white placeholder:text-gray-400 focus:border-violet-400 focus:ring-violet-400/50"
                   />
                 </div>
@@ -275,6 +312,7 @@ const Index = () => {
                     value={formData.message}
                     onChange={handleInputChange}
                     required
+                    disabled={isSubmitting}
                     rows={5}
                     className="bg-white/10 border-violet-500/30 text-white placeholder:text-gray-400 focus:border-violet-400 focus:ring-violet-400/50 resize-none"
                   />
@@ -283,10 +321,11 @@ const Index = () => {
                 <Button 
                   type="submit"
                   size="lg" 
-                  className="w-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-8 py-4 text-lg transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-violet-500/25 focus:ring-4 focus:ring-violet-500/50"
+                  disabled={isSubmitting}
+                  className="w-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-8 py-4 text-lg transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-violet-500/25 focus:ring-4 focus:ring-violet-500/50 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
                 >
                   <Mail className="mr-2" size={20} />
-                  Start Your Project
+                  {isSubmitting ? 'Sending...' : 'Start Your Project'}
                 </Button>
               </form>
               
