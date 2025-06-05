@@ -1,5 +1,4 @@
-
-import { Code, Palette, Zap, ExternalLink, Github, Linkedin, Mail, Database, Monitor, Wrench, Download } from "lucide-react";
+import { Code, Palette, Zap, ExternalLink, Github, Linkedin, Mail, Database, Monitor, Wrench, Download, Calendar } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -9,6 +8,11 @@ import { Label } from "@/components/ui/label";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
+import ThemeToggle from "@/components/ThemeToggle";
+import SkillsProgress from "@/components/SkillsProgress";
+import TestimonialsSection from "@/components/TestimonialsSection";
+import BlogSection from "@/components/BlogSection";
+import PersonalSection from "@/components/PersonalSection";
 import { useState } from "react";
 
 const Index = () => {
@@ -24,9 +28,8 @@ const Index = () => {
   };
 
   const handleDownloadCV = () => {
-    // Create a temporary link to trigger download
     const link = document.createElement('a');
-    link.href = '/RuhiNaaz_CV.pdf'; // Path to your CV in the public directory
+    link.href = '/RuhiNaaz_CV.pdf';
     link.download = 'RuhiNaaz_CV.pdf';
     link.setAttribute('aria-label', 'Download Ruhi Naaz CV');
     document.body.appendChild(link);
@@ -55,24 +58,6 @@ const Index = () => {
       ...prev,
       [e.target.name]: e.target.value
     }));
-  };
-
-  // Organized skills by category with descriptions
-  const skillCategories = {
-    frontend: [
-      { name: "React", icon: Code, description: "Building dynamic and interactive user interfaces since 2021" },
-      { name: "TypeScript", icon: Code, description: "Type-safe JavaScript development for robust applications" },
-      { name: "Tailwind CSS", icon: Palette, description: "Utility-first CSS framework for rapid UI development" },
-      { name: "UI/UX Design", icon: Palette, description: "Creating intuitive and beautiful user experiences" }
-    ],
-    backend: [
-      { name: "Node.js", icon: Database, description: "Server-side JavaScript runtime for scalable applications" },
-      { name: "Next.js", icon: Zap, description: "Full-stack React framework with SSR capabilities" }
-    ],
-    tools: [
-      { name: "Git", icon: Wrench, description: "Version control and collaborative development workflows" },
-      { name: "VS Code", icon: Monitor, description: "Primary development environment for efficient coding" }
-    ]
   };
 
   const projects = [
@@ -118,34 +103,23 @@ const Index = () => {
     }
   ];
 
-  const SkillBadge = ({ skill }: { skill: any }) => (
-    <TooltipProvider>
-      <Tooltip>
-        <TooltipTrigger asChild>
-          <div className="flex items-center gap-2 px-4 py-2 bg-violet-500/10 border border-violet-500/30 rounded-lg hover:bg-violet-500/20 hover:border-violet-400/50 transition-all duration-300 cursor-help group">
-            <skill.icon className="text-violet-400 group-hover:text-violet-300" size={18} />
-            <span className="text-white font-medium">{skill.name}</span>
-          </div>
-        </TooltipTrigger>
-        <TooltipContent className="max-w-xs">
-          <p>{skill.description}</p>
-        </TooltipContent>
-      </Tooltip>
-    </TooltipProvider>
-  );
-
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900">
-      {/* Navigation */}
+      {/* Navigation with Theme Toggle */}
+      <div className="fixed top-4 right-4 z-50">
+        <ThemeToggle />
+      </div>
+      
       <Navigation />
-
-      {/* Hero Section */}
       <HeroSection onScrollToSection={scrollToSection} />
 
       {/* About Section */}
       <section id="about" className="py-20 px-6">
         <div className="max-w-6xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-center mb-16 gradient-text">About Me</h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-center mb-8 gradient-text">About Me</h2>
+          <p className="text-xl text-center text-violet-300 mb-16 italic">
+            "Turning ideas into interactive digital experiences"
+          </p>
           <div className="grid md:grid-cols-2 gap-12 items-start">
             <div className="animate-slide-in-left">
               <p className="text-lg text-gray-300 mb-6 leading-relaxed">
@@ -155,7 +129,7 @@ const Index = () => {
               </p>
               <p className="text-lg text-gray-300 mb-6 leading-relaxed">
                 My journey in tech has led me to work on diverse projects like EcoStep (carbon footprint tracker), 
-                PointMate (AICTEE point management), and various web applications using modern technologies 
+                task management systems, and various web applications using modern technologies 
                 like React, TypeScript, and Node.js.
               </p>
               <p className="text-lg text-gray-300 mb-8 leading-relaxed">
@@ -164,15 +138,13 @@ const Index = () => {
                 I believe in writing clean, maintainable code and creating intuitive user experiences.
               </p>
               <div className="flex gap-4">
-                <a 
-                  href="/RuhiNaaz_CV.pdf" 
-                  download="RuhiNaaz_CV.pdf"
-                  aria-label="Download Ruhi Naaz CV"
-                  className="inline-flex items-center gap-2 bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-violet-500/25 focus:ring-4 focus:ring-violet-500/50"
+                <Button 
+                  className="bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 text-white px-6 py-3 rounded-lg font-medium transform hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-violet-500/25 focus:ring-4 focus:ring-violet-500/50"
+                  onClick={handleDownloadCV}
                 >
-                  <Download size={20} />
+                  <Download size={20} className="mr-2" />
                   Download CV
-                </a>
+                </Button>
                 <Button 
                   variant="outline" 
                   className="border-violet-500/50 text-violet-300 hover:bg-violet-500/10 glass transform hover:scale-105 transition-all duration-300"
@@ -183,47 +155,8 @@ const Index = () => {
               </div>
             </div>
             
-            {/* Skills Display with Categories */}
-            <div className="space-y-8">
-              {/* Frontend Skills */}
-              <div>
-                <h3 className="text-xl font-semibold text-violet-300 mb-4 flex items-center gap-2">
-                  <Monitor size={20} />
-                  Frontend Development
-                </h3>
-                <div className="flex flex-wrap gap-3">
-                  {skillCategories.frontend.map((skill) => (
-                    <SkillBadge key={skill.name} skill={skill} />
-                  ))}
-                </div>
-              </div>
-
-              {/* Backend Skills */}
-              <div>
-                <h3 className="text-xl font-semibold text-violet-300 mb-4 flex items-center gap-2">
-                  <Database size={20} />
-                  Backend Development
-                </h3>
-                <div className="flex flex-wrap gap-3">
-                  {skillCategories.backend.map((skill) => (
-                    <SkillBadge key={skill.name} skill={skill} />
-                  ))}
-                </div>
-              </div>
-
-              {/* Tools */}
-              <div>
-                <h3 className="text-xl font-semibold text-violet-300 mb-4 flex items-center gap-2">
-                  <Wrench size={20} />
-                  Tools & Technologies
-                </h3>
-                <div className="flex flex-wrap gap-3">
-                  {skillCategories.tools.map((skill) => (
-                    <SkillBadge key={skill.name} skill={skill} />
-                  ))}
-                </div>
-              </div>
-            </div>
+            {/* Skills with Progress Bars */}
+            <SkillsProgress />
           </div>
         </div>
       </section>
@@ -283,6 +216,15 @@ const Index = () => {
           </div>
         </div>
       </section>
+
+      {/* Testimonials Section */}
+      <TestimonialsSection />
+
+      {/* Blog Section */}
+      <BlogSection />
+
+      {/* Personal Section */}
+      <PersonalSection />
 
       {/* Contact Section */}
       <section id="contact" className="py-20 px-6">
@@ -348,15 +290,24 @@ const Index = () => {
                 </Button>
               </form>
               
-              <div className="text-center">
-                <p className="text-gray-400 text-sm mb-2">Or email me directly at</p>
+              <div className="text-center space-y-4">
+                <p className="text-gray-400 text-sm mb-2">Or contact me directly:</p>
                 <a 
                   href="mailto:kruhi7533@gmail.com"
-                  className="text-violet-400 hover:text-violet-300 transition-colors font-medium"
+                  className="text-violet-400 hover:text-violet-300 transition-colors font-medium block"
                 >
                   kruhi7533@gmail.com
                 </a>
-                <p className="text-gray-500 text-xs mt-2">✨ Typically replies within 24 hours</p>
+                <Button 
+                  variant="outline"
+                  className="border-yellow-400/70 text-yellow-300 hover:bg-yellow-400/10"
+                  onClick={() => window.open('https://calendly.com/ruhi-naaz', '_blank')}
+                >
+                  <Calendar className="mr-2" size={16} />
+                  Schedule a Meeting
+                </Button>
+                <p className="text-gray-500 text-xs">✨ Typically replies within 24 hours</p>
+                <p className="text-gray-500 text-xs">🌟 Trusted by startups and agencies worldwide</p>
               </div>
             </div>
             
@@ -424,12 +375,6 @@ const Index = () => {
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
-              </div>
-              
-              <div className="text-center max-w-sm">
-                <p className="text-gray-400 text-sm leading-relaxed">
-                  Trusted by startups and agencies worldwide for delivering high-quality web solutions.
-                </p>
               </div>
             </div>
           </div>
