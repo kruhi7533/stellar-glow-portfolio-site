@@ -9,7 +9,7 @@ export const emailjsConfig = {
 };
 
 // Template variables that will be sent to EmailJS
-export interface EmailTemplateParams {
+export interface EmailTemplateParams extends Record<string, unknown> {
   from_name: string;
   from_email: string;
   message: string;
