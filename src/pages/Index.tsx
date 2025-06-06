@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import Navigation from "@/components/Navigation";
@@ -11,7 +10,7 @@ import ContactForm from "@/components/ContactForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Github, ExternalLink, Calendar, Linkedin, Mail, Sparkles } from "lucide-react";
+import { Github, ExternalLink, Calendar, Linkedin, Mail, Sparkles, CheckCircle } from "lucide-react";
 
 const Index = () => {
   const [currentView, setCurrentView] = useState<'portfolio' | 'blog'>('portfolio');
@@ -212,48 +211,68 @@ const Index = () => {
               <div className="space-y-8 animate-slide-in-left" style={{ animationDelay: '0.2s' }}>
                 <Card className="glass glow-box border-violet-200/50 dark:border-violet-500/30">
                   <CardHeader>
-                    <CardTitle className="gradient-text">Other Ways to Connect</CardTitle>
+                    <CardTitle className="gradient-text flex items-center gap-2">
+                      <Mail className="h-5 w-5" />
+                      Other Ways to Connect
+                    </CardTitle>
                     <CardDescription>
                       Prefer a different way to get in touch? Here are some alternatives.
                     </CardDescription>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-center gap-4 p-3 rounded-lg bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-950/30 dark:to-purple-950/30 transition-all duration-300 hover:from-violet-100 hover:to-purple-100 dark:hover:from-violet-900/30 dark:hover:to-purple-900/30 hover:scale-105 cursor-pointer">
-                      <div className="bg-gradient-to-br from-violet-500 to-purple-600 p-3 rounded-lg shadow-lg">
-                        <Mail className="h-5 w-5 text-white" />
+                  <CardContent className="space-y-6">
+                    <div 
+                      className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-950/30 dark:to-purple-950/30 transition-all duration-300 hover:from-violet-100 hover:to-purple-100 dark:hover:from-violet-900/30 dark:hover:to-purple-900/30 hover:scale-105 cursor-pointer group border border-violet-200/50 dark:border-violet-700/50"
+                      onClick={() => window.location.href = 'mailto:kruhi7533@gmail.com?subject=Portfolio Inquiry&body=Hi Ruhi,%0D%0A%0D%0AI would like to connect with you regarding...'}
+                    >
+                      <div className="bg-gradient-to-br from-violet-500 to-purple-600 p-3 rounded-xl shadow-lg group-hover:shadow-xl transition-shadow">
+                        <Mail className="h-6 w-6 text-white" />
                       </div>
-                      <div>
-                        <p className="font-medium">Email</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">kruhi7533@gmail.com</p>
+                      <div className="flex-1">
+                        <p className="font-semibold text-gray-900 dark:text-white">Direct Email</p>
+                        <p className="text-sm text-violet-600 dark:text-violet-400 font-medium">kruhi7533@gmail.com</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">Click to compose email</p>
                       </div>
+                      <ExternalLink className="h-4 w-4 text-violet-600 dark:text-violet-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
                     
-                    <div className="flex items-center gap-4 p-3 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 transition-all duration-300 hover:from-blue-100 hover:to-indigo-100 dark:hover:from-blue-900/30 dark:hover:to-indigo-900/30 hover:scale-105 cursor-pointer">
-                      <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-3 rounded-lg shadow-lg">
-                        <Linkedin className="h-5 w-5 text-white" />
+                    <div 
+                      className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 transition-all duration-300 hover:from-blue-100 hover:to-indigo-100 dark:hover:from-blue-900/30 dark:hover:to-indigo-900/30 hover:scale-105 cursor-pointer group border border-blue-200/50 dark:border-blue-700/50"
+                      onClick={() => window.open('https://linkedin.com/in/ruhi-naaz-8b5960274/', '_blank')}
+                    >
+                      <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-3 rounded-xl shadow-lg group-hover:shadow-xl transition-shadow">
+                        <Linkedin className="h-6 w-6 text-white" />
                       </div>
-                      <div>
-                        <p className="font-medium">LinkedIn</p>
-                        <a 
-                          href="https://linkedin.com/in/ruhi-naaz-8b5960274/" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
-                        >
-                          Connect with me professionally
-                        </a>
+                      <div className="flex-1">
+                        <p className="font-semibold text-gray-900 dark:text-white">LinkedIn</p>
+                        <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">Professional Network</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">Connect for professional opportunities</p>
                       </div>
+                      <ExternalLink className="h-4 w-4 text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </div>
 
-                    <div className="flex items-center gap-4 p-3 rounded-lg bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 transition-all duration-300 hover:from-emerald-100 hover:to-teal-100 dark:hover:from-emerald-900/30 dark:hover:to-teal-900/30 hover:scale-105 cursor-pointer">
-                      <div className="bg-gradient-to-br from-emerald-500 to-teal-600 p-3 rounded-lg shadow-lg">
-                        <Calendar className="h-5 w-5 text-white" />
+                    <div 
+                      className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 transition-all duration-300 hover:from-emerald-100 hover:to-teal-100 dark:hover:from-emerald-900/30 dark:hover:to-teal-900/30 hover:scale-105 cursor-pointer group border border-emerald-200/50 dark:border-emerald-700/50"
+                      onClick={() => window.open('https://github.com/kruhi7533', '_blank')}
+                    >
+                      <div className="bg-gradient-to-br from-emerald-500 to-teal-600 p-3 rounded-xl shadow-lg group-hover:shadow-xl transition-shadow">
+                        <Github className="h-6 w-6 text-white" />
                       </div>
-                      <div>
-                        <p className="font-medium">Quick Response</p>
-                        <p className="text-sm text-emerald-600 dark:text-emerald-400">
-                          I typically respond within 24 hours
-                        </p>
+                      <div className="flex-1">
+                        <p className="font-semibold text-gray-900 dark:text-white">GitHub</p>
+                        <p className="text-sm text-emerald-600 dark:text-emerald-400 font-medium">View My Code</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">Explore my projects and contributions</p>
+                      </div>
+                      <ExternalLink className="h-4 w-4 text-emerald-600 dark:text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </div>
+
+                    <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-950/30 dark:to-red-950/30 border border-orange-200/50 dark:border-orange-700/50">
+                      <div className="bg-gradient-to-br from-orange-500 to-red-600 p-3 rounded-xl shadow-lg">
+                        <Calendar className="h-6 w-6 text-white" />
+                      </div>
+                      <div className="flex-1">
+                        <p className="font-semibold text-gray-900 dark:text-white">Quick Response</p>
+                        <p className="text-sm text-orange-600 dark:text-orange-400 font-medium">Within 24 hours</p>
+                        <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">I typically respond quickly during weekdays</p>
                       </div>
                     </div>
                   </CardContent>
@@ -261,13 +280,36 @@ const Index = () => {
 
                 <Card className="glass glow-box border-violet-200/50 dark:border-violet-500/30">
                   <CardHeader>
-                    <CardTitle className="gradient-text">Response Time</CardTitle>
+                    <CardTitle className="gradient-text">What to Expect</CardTitle>
                   </CardHeader>
-                  <CardContent>
-                    <p className="text-gray-600 dark:text-gray-300">
-                      I typically respond to messages within 24 hours during weekdays. 
-                      For urgent inquiries, please mention it in your message subject line.
-                    </p>
+                  <CardContent className="space-y-4">
+                    <div className="flex items-start gap-3">
+                      <div className="bg-violet-500 rounded-full p-1 mt-1">
+                        <CheckCircle className="h-3 w-3 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900 dark:text-white">Quick Response</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">I respond to all messages within 24 hours during weekdays</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="bg-violet-500 rounded-full p-1 mt-1">
+                        <CheckCircle className="h-3 w-3 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900 dark:text-white">Detailed Discussion</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">We'll discuss your project requirements in detail</p>
+                      </div>
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <div className="bg-violet-500 rounded-full p-1 mt-1">
+                        <CheckCircle className="h-3 w-3 text-white" />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900 dark:text-white">Free Consultation</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">Initial project consultation is always free</p>
+                      </div>
+                    </div>
                   </CardContent>
                 </Card>
               </div>

@@ -8,7 +8,7 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { useToast } from "@/hooks/use-toast";
 import emailjs from '@emailjs/browser';
 import { emailjsConfig, EmailTemplateParams } from '@/config/emailjs';
-import { Mail, AlertCircle, CheckCircle, Send, Loader2 } from 'lucide-react';
+import { Mail, AlertCircle, CheckCircle, Send, Loader2, Settings } from 'lucide-react';
 
 const ContactForm = () => {
   const [formData, setFormData] = useState({
@@ -90,9 +90,15 @@ const ContactForm = () => {
     if (!isConfigured) {
       toast({
         title: "Configuration Required",
-        description: "EmailJS credentials need to be configured. Please check the setup instructions.",
+        description: "EmailJS credentials need to be configured. Check the console for setup instructions.",
         variant: "destructive",
       });
+      console.log('EmailJS Setup Instructions:');
+      console.log('1. Go to https://www.emailjs.com and create an account');
+      console.log('2. Create an email service and get your Service ID');
+      console.log('3. Create an email template and get your Template ID');
+      console.log('4. Get your Public Key from Account settings');
+      console.log('5. Update the values in src/config/emailjs.ts');
       return;
     }
 
@@ -103,10 +109,11 @@ const ContactForm = () => {
         from_name: formData.name.trim(),
         from_email: formData.email.trim(),
         message: formData.message.trim(),
-        to_name: "Ruhi Naaz"
+        to_name: "Ruhi Naaz",
+        reply_to: formData.email.trim()
       };
 
-      console.log('Sending email with params:', templateParams);
+      console.log('Sending email with EmailJS...');
 
       await emailjs.send(
         emailjsConfig.serviceId,
@@ -135,14 +142,14 @@ const ContactForm = () => {
     } catch (error: any) {
       console.error('EmailJS error:', error);
       
-      let errorMessage = "Failed to send message. Please try again later.";
+      let errorMessage = "Failed to send message. Please try again or contact me directly.";
       
       if (error.status === 400) {
-        errorMessage = "Configuration error. Please check EmailJS setup.";
+        errorMessage = "Invalid email configuration. Please check the setup.";
       } else if (error.status === 401) {
-        errorMessage = "Authentication failed. Please check your EmailJS credentials.";
+        errorMessage = "Email service authentication failed. Please check credentials.";
       } else if (error.status === 402) {
-        errorMessage = "Email quota exceeded. Please try again later.";
+        errorMessage = "Email quota exceeded. Please try again later or contact me directly.";
       } else if (error.text) {
         errorMessage = `Error: ${error.text}`;
       }
@@ -159,7 +166,7 @@ const ContactForm = () => {
 
   if (emailSent) {
     return (
-      <Card className="w-full max-w-2xl mx-auto animate-fade-in">
+      <Card className="w-full max-w-2xl mx-auto animate-bounce-in">
         <CardContent className="text-center py-12">
           <div className="animate-bounce mb-4">
             <CheckCircle className="h-16 w-16 text-green-500 mx-auto" />
@@ -196,12 +203,13 @@ const ContactForm = () => {
         {!isConfigured && (
           <div className="bg-yellow-50 dark:bg-yellow-900/20 border border-yellow-200 dark:border-yellow-800 rounded-lg p-4 mt-4 animate-fade-in">
             <div className="flex items-start gap-2">
-              <AlertCircle className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-0.5" />
+              <Settings className="h-5 w-5 text-yellow-600 dark:text-yellow-400 mt-0.5" />
               <div>
                 <h4 className="text-sm font-medium text-yellow-800 dark:text-yellow-200">EmailJS Setup Required</h4>
                 <p className="text-sm text-yellow-700 dark:text-yellow-300 mt-1">
-                  To enable the contact form, please configure your EmailJS credentials in 
+                  To enable email functionality, please configure EmailJS in 
                   <code className="bg-yellow-100 dark:bg-yellow-800 px-1 rounded text-xs mx-1">src/config/emailjs.ts</code>
+                  Check the console for detailed setup instructions.
                 </p>
               </div>
             </div>
@@ -213,7 +221,7 @@ const ContactForm = () => {
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="animate-slide-in-left" style={{ animationDelay: '0.1s' }}>
-              <Label htmlFor="name">Name *</Label>
+              <Label htmlFor="name" className="text-sm font-medium">Name *</Label>
               <Input
                 id="name"
                 name="name"
@@ -223,12 +231,12 @@ const ContactForm = () => {
                 placeholder="Your full name"
                 required
                 disabled={isSubmitting}
-                className="transition-all duration-300 focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
+                className="mt-1 transition-all duration-300 focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
               />
             </div>
             
             <div className="animate-slide-in-left" style={{ animationDelay: '0.2s' }}>
-              <Label htmlFor="email">Email *</Label>
+              <Label htmlFor="email" className="text-sm font-medium">Email *</Label>
               <Input
                 id="email"
                 name="email"
@@ -238,23 +246,24 @@ const ContactForm = () => {
                 placeholder="your@email.com"
                 required
                 disabled={isSubmitting}
-                className="transition-all duration-300 focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
+                className="mt-1 transition-all duration-300 focus:ring-2 focus:ring-violet-500 focus:border-violet-500"
               />
             </div>
           </div>
           
           <div className="animate-slide-in-left" style={{ animationDelay: '0.3s' }}>
-            <Label htmlFor="message">Message *</Label>
+            <Label htmlFor="message" className="text-sm font-medium">Message *</Label>
             <Textarea
               id="message"
               name="message"
               value={formData.message}
               onChange={handleInputChange}
-              placeholder="Tell me about your project or just say hello!"
+              placeholder="Tell me about your project or just say hello! I'd love to hear from you."
               rows={5}
               required
               disabled={isSubmitting}
-              className="transition-all duration-300 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 resize-none"
+              className="mt-1 transition-all duration-300 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 resize-none"
+              maxLength={500}
             />
             <p className="text-xs text-gray-500 dark:text-gray-400 mt-1">
               {formData.message.length}/500 characters
@@ -279,6 +288,12 @@ const ContactForm = () => {
               </>
             )}
           </Button>
+          
+          {!isConfigured && (
+            <p className="text-xs text-center text-gray-500 dark:text-gray-400">
+              Note: Email functionality requires EmailJS configuration
+            </p>
+          )}
         </form>
       </CardContent>
     </Card>

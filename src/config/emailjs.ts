@@ -14,6 +14,7 @@ export interface EmailTemplateParams extends Record<string, unknown> {
   from_email: string;
   message: string;
   to_name: string;
+  reply_to: string;
 }
 
 // Instructions for setting up EmailJS:
@@ -35,14 +36,17 @@ export interface EmailTemplateParams extends Record<string, unknown> {
 //      {{from_email}} - sender's email
 //      {{message}} - the message content
 //      {{to_name}} - your name (recipient)
+//      {{reply_to}} - sender's email for replies
 //    - Example template:
-//      Subject: New message from {{from_name}}
+//      Subject: New Portfolio Contact: {{from_name}}
 //      Body: 
 //        Hello {{to_name}},
 //        
 //        You have received a new message from {{from_name}} ({{from_email}}):
 //        
 //        {{message}}
+//        
+//        Reply to: {{reply_to}}
 //        
 //        Best regards,
 //        Your Portfolio Contact Form
@@ -56,3 +60,4 @@ export interface EmailTemplateParams extends Record<string, unknown> {
 //    - Make sure all three values are replaced
 //    - Try sending a test message
 //    - Check your email for the message
+
