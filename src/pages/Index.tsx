@@ -22,28 +22,44 @@ const Index = () => {
 
   const projects = [
     {
-      title: "EcoStep",
-      description: "A sustainable lifestyle tracking app that helps users monitor their carbon footprint and adopt eco-friendly habits.",
+      title: "EcoStep - Carbon Footprint Tracker",
+      description: "A sustainable lifestyle tracking app that helps users monitor their carbon footprint and adopt eco-friendly habits with detailed analytics and tips.",
       image: "https://images.unsplash.com/photo-1569163139394-de4e4f43e4e3?w=500&h=300&fit=crop&auto=format&q=80",
-      tags: ["React", "Node.js", "MongoDB", "Chart.js"],
-      liveLink: "https://ecostep-demo.netlify.app",
-      githubLink: "https://github.com/username/ecostep"
+      tags: ["React", "Chart.js", "Local Storage", "Environmental"],
+      liveLink: "https://carbon-footprint-tracker-plum.vercel.app/",
+      githubLink: "https://github.com/kruhi7533"
     },
     {
-      title: "TaskFlow Pro",
-      description: "A collaborative project management tool with real-time updates, file sharing, and team communication features.",
+      title: "Task Manager Pro",
+      description: "A comprehensive task management application with priority levels, categories, and deadline tracking to boost productivity.",
       image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=500&h=300&fit=crop&auto=format&q=80",
-      tags: ["Vue.js", "Firebase", "Tailwind CSS", "Socket.io"],
-      liveLink: "https://taskflow-pro.vercel.app",
-      githubLink: "https://github.com/username/taskflow-pro"
+      tags: ["React", "TypeScript", "Local Storage", "Productivity"],
+      liveLink: "https://taskmanager-eight-pi.vercel.app/",
+      githubLink: "https://github.com/kruhi7533"
     },
     {
-      title: "AI Recipe Generator",
-      description: "An intelligent recipe recommendation system that suggests meals based on available ingredients and dietary preferences.",
-      image: "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=500&h=300&fit=crop&auto=format&q=80",
-      tags: ["Python", "Flask", "OpenAI API", "React"],
-      liveLink: "https://ai-recipe-gen.herokuapp.com",
-      githubLink: "https://github.com/username/ai-recipe-generator"
+      title: "Pomodoro Timer",
+      description: "A focus-enhancing Pomodoro technique timer with customizable work and break intervals, session tracking, and productivity analytics.",
+      image: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=500&h=300&fit=crop&auto=format&q=80",
+      tags: ["React", "Timer", "Focus", "Productivity"],
+      liveLink: "https://pomodoro-kappa-virid.vercel.app/",
+      githubLink: "https://github.com/kruhi7533"
+    },
+    {
+      title: "Tourism Explorer",
+      description: "A travel and tourism discovery platform showcasing beautiful destinations with detailed information and travel guides.",
+      image: "https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=500&h=300&fit=crop&auto=format&q=80",
+      tags: ["React", "Travel", "Tourism", "Responsive Design"],
+      liveLink: "https://tourism-three-nu.vercel.app/",
+      githubLink: "https://github.com/kruhi7533"
+    },
+    {
+      title: "Sudoku Solver",
+      description: "An intelligent Sudoku puzzle solver with step-by-step solution visualization and multiple difficulty levels for puzzle enthusiasts.",
+      image: "https://images.unsplash.com/photo-1606092195730-5d7b9af1efc5?w=500&h=300&fit=crop&auto=format&q=80",
+      tags: ["React", "Algorithm", "Puzzle", "Logic"],
+      liveLink: "https://puzzle-logic-master.vercel.app/",
+      githubLink: "https://github.com/kruhi7533"
     }
   ];
 
