@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from "react";
-import { Github, Linkedin, Mail, Menu, X } from "lucide-react";
+import { Github, Linkedin, Mail, Menu, X, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "./ThemeToggle";
 
@@ -62,6 +62,13 @@ const Navigation = () => {
               aria-label="Go to Projects section"
             >
               Projects
+            </button>
+            <button 
+              onClick={() => scrollToSection('blog')}
+              className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-transparent rounded-md px-3 py-2"
+              aria-label="Go to Blog section"
+            >
+              Blog
             </button>
             <button 
               onClick={() => scrollToSection('contact')}
@@ -137,6 +144,13 @@ const Navigation = () => {
                 aria-label="Go to Projects section"
               >
                 Projects
+              </button>
+              <button 
+                onClick={() => scrollToSection('blog')}
+                className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 font-medium transition-colors text-left focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-transparent rounded-md px-2 py-1"
+                aria-label="Go to Blog section"
+              >
+                Blog
               </button>
               <button 
                 onClick={() => scrollToSection('contact')}
