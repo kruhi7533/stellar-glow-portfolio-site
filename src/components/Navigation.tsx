@@ -1,10 +1,13 @@
-
 import { useState, useEffect } from "react";
 import { Github, Linkedin, Mail, Menu, X, BookOpen } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import ThemeToggle from "./ThemeToggle";
 
-const Navigation = () => {
+interface NavigationProps {
+  onShowBlog?: () => void;
+}
+
+const Navigation = ({ onShowBlog }: NavigationProps) => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -31,11 +34,16 @@ const Navigation = () => {
     window.location.href = 'mailto:kruhi7533@gmail.com';
   };
 
+  const handleBlogClick = () => {
+    setIsMobileMenuOpen(false);
+    onShowBlog?.();
+  };
+
   return (
     <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
       isScrolled 
-        ? 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-lg border-b border-violet-200/50 dark:border-violet-500/30 shadow-lg' 
-        : 'bg-white/80 dark:bg-gray-900/80 backdrop-blur-md'
+        ? 'bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg border-b border-violet-200/50 dark:border-violet-500/30 shadow-lg' 
+        : 'bg-white/90 dark:bg-gray-900/90 backdrop-blur-md'
     }`}>
       <div className="max-w-6xl mx-auto px-6 py-4">
         <div className="flex items-center justify-between">
@@ -64,10 +72,11 @@ const Navigation = () => {
               Projects
             </button>
             <button 
-              onClick={() => scrollToSection('blog')}
-              className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-transparent rounded-md px-3 py-2"
-              aria-label="Go to Blog section"
+              onClick={handleBlogClick}
+              className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 font-medium transition-colors focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-transparent rounded-md px-3 py-2 flex items-center gap-2"
+              aria-label="Go to Blog"
             >
+              <BookOpen size={16} />
               Blog
             </button>
             <button 
@@ -101,7 +110,7 @@ const Navigation = () => {
               <Button 
                 variant="ghost" 
                 size="sm" 
-                className="text-gray-600 dark:text-gray-400 hover:text-violet-600 dark:hover:text-violet-400 p-2 focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-transparent"
+                className="text-gray-600 dark:text-gray-400 hover:text-violet-600 dark:hover:text-violet-400 p-2 focus:ring-2 focus:ring-offset-2 focus:ring-offset-transparent"
                 onClick={handleEmailClick}
                 aria-label="Send email"
               >
@@ -129,7 +138,7 @@ const Navigation = () => {
 
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
-          <div className="md:hidden mt-4 pb-4 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg rounded-lg border border-violet-200/50 dark:border-violet-500/30 p-4 shadow-lg">
+          <div className="md:hidden mt-4 pb-4 bg-white/95 dark:bg-gray-900/95 backdrop-blur-lg rounded-lg border border-violet-200/50 dark:border-violet-500/30 p-4 shadow-lg animate-fade-in">
             <div className="flex flex-col space-y-4">
               <button 
                 onClick={() => scrollToSection('about')}
@@ -146,10 +155,11 @@ const Navigation = () => {
                 Projects
               </button>
               <button 
-                onClick={() => scrollToSection('blog')}
-                className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 font-medium transition-colors text-left focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-transparent rounded-md px-2 py-1"
-                aria-label="Go to Blog section"
+                onClick={handleBlogClick}
+                className="text-gray-700 dark:text-gray-300 hover:text-violet-600 dark:hover:text-violet-400 font-medium transition-colors text-left focus:outline-none focus:ring-2 focus:ring-violet-500 focus:ring-offset-2 focus:ring-offset-transparent rounded-md px-2 py-1 flex items-center gap-2"
+                aria-label="Go to Blog"
               >
+                <BookOpen size={16} />
                 Blog
               </button>
               <button 

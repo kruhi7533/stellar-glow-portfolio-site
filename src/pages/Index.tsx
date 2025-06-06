@@ -1,11 +1,12 @@
 
+import { useState } from "react";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
 import PersonalSection from "@/components/PersonalSection";
 import SkillsProgress from "@/components/SkillsProgress";
-import TestimonialsSection from "@/components/TestimonialsSection";
 import BlogSection from "@/components/BlogSection";
+import BlogPage from "@/components/BlogPage";
 import ContactForm from "@/components/ContactForm";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
@@ -13,12 +14,40 @@ import { Badge } from "@/components/ui/badge";
 import { Github, ExternalLink, Calendar, Linkedin, Mail, Sparkles } from "lucide-react";
 
 const Index = () => {
+  const [currentView, setCurrentView] = useState<'portfolio' | 'blog'>('portfolio');
+
   const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (currentView !== 'portfolio') {
+      setCurrentView('portfolio');
+      setTimeout(() => {
+        const element = document.getElementById(sectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    } else {
+      const element = document.getElementById(sectionId);
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth' });
+      }
     }
   };
+
+  const showBlog = () => {
+    setCurrentView('blog');
+  };
+
+  const showPortfolio = () => {
+    setCurrentView('portfolio');
+  };
+
+  if (currentView === 'blog') {
+    return (
+      <ThemeProvider>
+        <BlogPage onBack={showPortfolio} />
+      </ThemeProvider>
+    );
+  }
 
   const projects = [
     {
@@ -71,9 +100,14 @@ const Index = () => {
           <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-violet-400/20 to-purple-600/20 rounded-full blur-3xl animate-float"></div>
           <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-cyan-600/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
           <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-pink-400/10 to-violet-600/10 rounded-full blur-3xl animate-pulse"></div>
+          
+          {/* Additional floating particles */}
+          <div className="absolute top-20 left-20 w-4 h-4 bg-violet-400/30 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
+          <div className="absolute top-60 right-32 w-6 h-6 bg-purple-400/30 rounded-full animate-float" style={{ animationDelay: '3s' }}></div>
+          <div className="absolute bottom-32 left-1/3 w-3 h-3 bg-blue-400/30 rounded-full animate-float" style={{ animationDelay: '0.5s' }}></div>
         </div>
 
-        <Navigation />
+        <Navigation onShowBlog={showBlog} />
         
         {/* Hero Section */}
         <HeroSection onScrollToSection={scrollToSection} />
@@ -89,11 +123,11 @@ const Index = () => {
           <div className="max-w-6xl mx-auto">
             <div className="text-center mb-16 animate-fade-in">
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Sparkles className="h-8 w-8 text-violet-600 dark:text-violet-400" />
+                <Sparkles className="h-8 w-8 text-violet-600 dark:text-violet-400 animate-pulse" />
                 <h2 className="text-4xl font-bold gradient-text">
                   Featured Projects
                 </h2>
-                <Sparkles className="h-8 w-8 text-violet-600 dark:text-violet-400" />
+                <Sparkles className="h-8 w-8 text-violet-600 dark:text-violet-400 animate-pulse" />
               </div>
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
                 Here are some of my recent projects that showcase my skills and creativity.
@@ -102,7 +136,11 @@ const Index = () => {
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {projects.map((project, index) => (
-                <Card key={index} className="group hover:shadow-2xl transition-all duration-500 hover:scale-105 animate-slide-in-left glass glow-box border-violet-200/50 dark:border-violet-500/30 backdrop-blur-sm">
+                <Card 
+                  key={index} 
+                  className="group hover:shadow-2xl transition-all duration-500 hover:scale-105 animate-slide-in-left glass glow-box border-violet-200/50 dark:border-violet-500/30 backdrop-blur-sm"
+                  style={{ animationDelay: `${index * 0.1}s` }}
+                >
                   <div className="relative overflow-hidden rounded-t-lg">
                     <img
                       src={project.image}
@@ -150,11 +188,8 @@ const Index = () => {
           </div>
         </section>
 
-        {/* Testimonials Section */}
-        <TestimonialsSection />
-
         {/* Blog Section */}
-        <BlogSection />
+        <BlogSection onShowBlog={showBlog} />
 
         {/* Contact Section */}
         <section id="contact" className="py-20 px-4 bg-gradient-to-br from-violet-100/50 via-purple-50/50 to-blue-100/50 dark:from-violet-950/30 dark:via-purple-950/20 dark:to-blue-950/30 relative">
@@ -174,7 +209,7 @@ const Index = () => {
               <ContactForm />
 
               {/* Contact Information */}
-              <div className="space-y-8">
+              <div className="space-y-8 animate-slide-in-left" style={{ animationDelay: '0.2s' }}>
                 <Card className="glass glow-box border-violet-200/50 dark:border-violet-500/30">
                   <CardHeader>
                     <CardTitle className="gradient-text">Other Ways to Connect</CardTitle>
@@ -183,24 +218,24 @@ const Index = () => {
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-4">
-                    <div className="flex items-center gap-4 p-3 rounded-lg bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-950/30 dark:to-purple-950/30 transition-colors hover:from-violet-100 hover:to-purple-100 dark:hover:from-violet-900/30 dark:hover:to-purple-900/30">
+                    <div className="flex items-center gap-4 p-3 rounded-lg bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-950/30 dark:to-purple-950/30 transition-all duration-300 hover:from-violet-100 hover:to-purple-100 dark:hover:from-violet-900/30 dark:hover:to-purple-900/30 hover:scale-105 cursor-pointer">
                       <div className="bg-gradient-to-br from-violet-500 to-purple-600 p-3 rounded-lg shadow-lg">
                         <Mail className="h-5 w-5 text-white" />
                       </div>
                       <div>
                         <p className="font-medium">Email</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">ruhi@example.com</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-300">kruhi7533@gmail.com</p>
                       </div>
                     </div>
                     
-                    <div className="flex items-center gap-4 p-3 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 transition-colors hover:from-blue-100 hover:to-indigo-100 dark:hover:from-blue-900/30 dark:hover:to-indigo-900/30">
+                    <div className="flex items-center gap-4 p-3 rounded-lg bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 transition-all duration-300 hover:from-blue-100 hover:to-indigo-100 dark:hover:from-blue-900/30 dark:hover:to-indigo-900/30 hover:scale-105 cursor-pointer">
                       <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-3 rounded-lg shadow-lg">
                         <Linkedin className="h-5 w-5 text-white" />
                       </div>
                       <div>
                         <p className="font-medium">LinkedIn</p>
                         <a 
-                          href="https://linkedin.com/in/yourprofile" 
+                          href="https://linkedin.com/in/ruhi-naaz-8b5960274/" 
                           target="_blank" 
                           rel="noopener noreferrer"
                           className="text-sm text-blue-600 dark:text-blue-400 hover:underline"
@@ -210,20 +245,15 @@ const Index = () => {
                       </div>
                     </div>
 
-                    <div className="flex items-center gap-4 p-3 rounded-lg bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 transition-colors hover:from-emerald-100 hover:to-teal-100 dark:hover:from-emerald-900/30 dark:hover:to-teal-900/30">
+                    <div className="flex items-center gap-4 p-3 rounded-lg bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 transition-all duration-300 hover:from-emerald-100 hover:to-teal-100 dark:hover:from-emerald-900/30 dark:hover:to-teal-900/30 hover:scale-105 cursor-pointer">
                       <div className="bg-gradient-to-br from-emerald-500 to-teal-600 p-3 rounded-lg shadow-lg">
                         <Calendar className="h-5 w-5 text-white" />
                       </div>
                       <div>
-                        <p className="font-medium">Schedule a Call</p>
-                        <a 
-                          href="https://calendly.com/yourprofile" 
-                          target="_blank" 
-                          rel="noopener noreferrer"
-                          className="text-sm text-emerald-600 dark:text-emerald-400 hover:underline"
-                        >
-                          Book a 30-minute chat
-                        </a>
+                        <p className="font-medium">Quick Response</p>
+                        <p className="text-sm text-emerald-600 dark:text-emerald-400">
+                          I typically respond within 24 hours
+                        </p>
                       </div>
                     </div>
                   </CardContent>
@@ -236,7 +266,7 @@ const Index = () => {
                   <CardContent>
                     <p className="text-gray-600 dark:text-gray-300">
                       I typically respond to messages within 24 hours during weekdays. 
-                      For urgent inquiries, please mention it in your message.
+                      For urgent inquiries, please mention it in your message subject line.
                     </p>
                   </CardContent>
                 </Card>
@@ -252,13 +282,13 @@ const Index = () => {
             <h3 className="text-2xl font-bold mb-4 gradient-text text-white">Ruhi Naaz</h3>
             <p className="text-gray-300 mb-8">Full Stack Developer & UI/UX Designer</p>
             <div className="flex justify-center gap-6 mb-8">
-              <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-violet-400 transition-colors transform hover:scale-110">
+              <a href="https://github.com/kruhi7533" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-violet-400 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
                 <Github className="h-6 w-6" />
               </a>
-              <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-violet-400 transition-colors transform hover:scale-110">
+              <a href="https://linkedin.com/in/ruhi-naaz-8b5960274/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-violet-400 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
                 <Linkedin className="h-6 w-6" />
               </a>
-              <a href="mailto:ruhi@example.com" className="text-gray-400 hover:text-violet-400 transition-colors transform hover:scale-110">
+              <a href="mailto:kruhi7533@gmail.com" className="text-gray-400 hover:text-violet-400 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
                 <Mail className="h-6 w-6" />
               </a>
             </div>
