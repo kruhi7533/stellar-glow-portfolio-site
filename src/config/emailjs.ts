@@ -3,9 +3,9 @@
 // Replace these values with your actual EmailJS credentials
 
 export const emailjsConfig = {
-  serviceId: 'YOUR_SERVICE_ID', // Get this from EmailJS dashboard
-  templateId: 'YOUR_TEMPLATE_ID', // Get this from EmailJS dashboard  
-  publicKey: 'YOUR_PUBLIC_KEY', // Get this from EmailJS dashboard
+  serviceId: 'service_npxab2j', // Get this from EmailJS dashboard
+  templateId: 'template_odv5eyf', // Get this from EmailJS dashboard  
+  publicKey: 'tPK7EZQ30mAopGXnz', // Get this from EmailJS dashboard
 };
 
 // Template variables that will be sent to EmailJS

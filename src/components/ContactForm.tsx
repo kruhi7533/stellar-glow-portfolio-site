@@ -260,7 +260,7 @@ const ContactForm = () => {
               onChange={handleInputChange}
               placeholder="Tell me about your project or just say hello! I'd love to hear from you."
               rows={5}
-              required
+              
               disabled={isSubmitting}
               className="mt-1 transition-all duration-300 focus:ring-2 focus:ring-violet-500 focus:border-violet-500 resize-none"
               maxLength={500}
