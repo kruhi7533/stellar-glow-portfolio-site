@@ -16,8 +16,8 @@ export const useScrollSection = () => {
         });
       },
       {
-        threshold: 0.3,
-        rootMargin: '-100px 0px -100px 0px',
+        threshold: 0.1,
+        rootMargin: '-50px 0px -50px 0px',
       }
     );
 
