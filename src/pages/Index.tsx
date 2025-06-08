@@ -1,3 +1,4 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -12,7 +13,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Github, ExternalLink, Calendar, Linkedin, Mail, Sparkles, CheckCircle, Star, Trophy, Zap } from "lucide-react";
+import { Github, ExternalLink, Calendar, Linkedin, Mail, Sparkles, CheckCircle, Star, Trophy, Zap, Phone, MapPin, Clock } from "lucide-react";
 
 const Index = () => {
   const [currentView, setCurrentView] = useState<'portfolio' | 'blog'>('portfolio');
@@ -143,32 +144,45 @@ const Index = () => {
             }}
           />
           
-          {/* Enhanced Floating Particles */}
-          {[...Array(12)].map((_, i) => (
+          {/* Enhanced Floating Images/Particles */}
+          {[...Array(15)].map((_, i) => (
             <motion.div
               key={i}
-              className="absolute rounded-full"
+              className="absolute"
               style={{
-                width: `${4 + i % 3}px`,
-                height: `${4 + i % 3}px`,
-                backgroundColor: ['#8b5cf6', '#a855f7', '#06b6d4', '#ec4899'][i % 4],
-                top: `${15 + (i * 8) % 70}%`,
-                left: `${10 + (i * 7) % 80}%`,
-                opacity: 0.4
+                top: `${15 + (i * 6) % 70}%`,
+                left: `${10 + (i * 8) % 80}%`,
               }}
               animate={{
-                y: [0, -40, 0],
-                x: [0, Math.sin(i) * 20, 0],
-                opacity: [0.2, 0.8, 0.2],
-                scale: [0.8, 1.2, 0.8]
+                y: [0, -60, 0],
+                x: [0, Math.sin(i) * 30, 0],
+                rotate: [0, 360],
+                scale: [0.8, 1.3, 0.8]
               }}
               transition={{
-                duration: 5 + i * 0.5,
+                duration: 8 + i * 0.5,
                 repeat: Infinity,
                 ease: "easeInOut",
-                delay: i * 0.3,
+                delay: i * 0.4,
               }}
-            />
+            >
+              {i % 4 === 0 && (
+                <div className="w-8 h-8 bg-gradient-to-br from-violet-400/60 to-purple-600/60 rounded-full blur-sm" />
+              )}
+              {i % 4 === 1 && (
+                <div className="w-6 h-6 bg-gradient-to-br from-cyan-400/60 to-blue-600/60 rounded-lg blur-sm rotate-45" />
+              )}
+              {i % 4 === 2 && (
+                <div className="w-5 h-5 bg-gradient-to-br from-pink-400/60 to-rose-600/60 rounded-full blur-sm" />
+              )}
+              {i % 4 === 3 && (
+                <img 
+                  src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=40&h=40&fit=crop&auto=format&q=80" 
+                  alt=""
+                  className="w-12 h-12 rounded-full opacity-40 blur-[1px]"
+                />
+              )}
+            </motion.div>
           ))}
 
           {/* Geometric Shapes */}
@@ -247,7 +261,7 @@ const Index = () => {
                 >
                   <Trophy className="h-10 w-10 text-violet-600 dark:text-violet-400" />
                 </motion.div>
-                <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 dark:from-violet-400 dark:via-purple-400 dark:to-indigo-400 bg-clip-text text-transparent">
+                <h2 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 dark:from-violet-300 dark:via-purple-300 dark:to-indigo-300 bg-clip-text text-transparent drop-shadow-2xl">
                   Featured Projects
                 </h2>
                 <motion.div
@@ -257,7 +271,7 @@ const Index = () => {
                   <Zap className="h-10 w-10 text-violet-600 dark:text-violet-400" />
                 </motion.div>
               </div>
-              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
                 Discover my latest creations that showcase innovation, creativity, and technical excellence in web development.
               </p>
               <motion.div
@@ -281,14 +295,16 @@ const Index = () => {
                     delay: index * 0.15,
                     ease: [0.25, 0.46, 0.45, 0.94]
                   }}
-                  whileHover={{ 
+                  whileHover={project.featured ? { 
                     y: -15,
                     rotate: index % 2 === 0 ? 2 : -2,
                     transition: { duration: 0.3 }
-                  }}
+                  } : {}}
                   className={`group ${project.featured ? 'md:col-span-1 lg:col-span-1' : ''}`}
                 >
-                  <Card className="group hover:shadow-2xl transition-all duration-700 glass border-2 border-transparent bg-gradient-to-br from-white/90 to-white/60 dark:from-gray-900/90 dark:to-gray-800/60 backdrop-blur-xl hover:border-violet-300/60 dark:hover:border-violet-500/60 hover:shadow-violet-500/30 overflow-hidden h-full relative">
+                  <Card className={`group transition-all duration-700 glass border-2 border-transparent bg-gradient-to-br from-white/90 to-white/60 dark:from-gray-900/90 dark:to-gray-800/60 backdrop-blur-xl overflow-hidden h-full relative ${
+                    project.featured ? 'hover:shadow-2xl hover:border-violet-300/60 dark:hover:border-violet-500/60 hover:shadow-violet-500/30' : ''
+                  }`}>
                     {project.featured && (
                       <div className="absolute top-4 right-4 z-10">
                         <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-semibold border-0 shadow-lg">
@@ -300,7 +316,7 @@ const Index = () => {
                     
                     <div className="relative overflow-hidden rounded-t-lg">
                       <motion.div
-                        className="relative group-hover:scale-110 transition-transform duration-700"
+                        className={`relative ${project.featured ? 'group-hover:scale-110 transition-transform duration-700' : ''}`}
                       >
                         <img
                           src={project.image}
@@ -310,13 +326,19 @@ const Index = () => {
                             e.currentTarget.src = "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=500&h=300&fit=crop&auto=format&q=80";
                           }}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-violet-900/70 via-purple-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                        <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        {project.featured && (
+                          <>
+                            <div className="absolute inset-0 bg-gradient-to-t from-violet-900/70 via-purple-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                          </>
+                        )}
                       </motion.div>
                     </div>
                     
                     <CardHeader className="pb-3">
-                      <CardTitle className="text-xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 dark:from-violet-400 dark:to-purple-400 bg-clip-text text-transparent group-hover:from-violet-500 group-hover:to-purple-500 transition-all duration-300">
+                      <CardTitle className={`text-xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 dark:from-violet-400 dark:to-purple-400 bg-clip-text text-transparent ${
+                        project.featured ? 'group-hover:from-violet-500 group-hover:to-purple-500 transition-all duration-300' : ''
+                      }`}>
                         {project.title}
                       </CardTitle>
                       <CardDescription className="text-gray-600 dark:text-gray-300 leading-relaxed">
@@ -329,8 +351,8 @@ const Index = () => {
                         {project.tags.map((tag, tagIndex) => (
                           <motion.div
                             key={tagIndex}
-                            whileHover={{ scale: 1.1, rotate: 3 }}
-                            whileTap={{ scale: 0.95 }}
+                            whileHover={project.featured ? { scale: 1.1, rotate: 3 } : {}}
+                            whileTap={project.featured ? { scale: 0.95 } : {}}
                           >
                             <Badge className="bg-gradient-to-r from-violet-100 to-purple-100 text-violet-800 dark:from-violet-900/60 dark:to-purple-900/60 dark:text-violet-200 border border-violet-200 dark:border-violet-700 hover:shadow-md transition-all duration-300">
                               {tag}
@@ -382,14 +404,14 @@ const Index = () => {
         </AnimatedSection>
 
         {/* Enhanced Contact Section */}
-        <AnimatedSection id="contact" className="py-24 px-4 bg-gradient-to-br from-violet-100/60 via-purple-50/60 to-blue-100/60 dark:from-violet-950/40 dark:via-purple-950/30 dark:to-blue-950/40 relative" delay={0.5}>
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-violet-500/10 to-transparent"></div>
+        <AnimatedSection id="contact" className="py-24 px-4 relative" delay={0.5}>
+          <div className="absolute inset-0 bg-gradient-to-br from-violet-900/10 via-purple-900/5 to-blue-900/10 dark:from-violet-950/40 dark:via-purple-950/30 dark:to-blue-950/40"></div>
           <div className="absolute inset-0">
             <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-violet-400/20 rounded-full blur-3xl animate-pulse"></div>
             <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-purple-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
           </div>
           
-          <div className="max-w-5xl mx-auto relative">
+          <div className="max-w-6xl mx-auto relative">
             <motion.div 
               className="text-center mb-20"
               initial={{ opacity: 0, y: 30 }}
@@ -397,10 +419,10 @@ const Index = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 dark:from-violet-400 dark:via-purple-400 dark:to-indigo-400 bg-clip-text text-transparent">
+              <h2 className="text-5xl md:text-7xl font-black mb-6 bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 dark:from-violet-300 dark:via-purple-300 dark:to-indigo-300 bg-clip-text text-transparent drop-shadow-2xl">
                 Let's Create Something Amazing
               </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
                 Ready to bring your vision to life? Let's collaborate and build extraordinary digital experiences together.
               </p>
               <motion.div
@@ -419,117 +441,119 @@ const Index = () => {
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.2 }}
+                className="order-2 lg:order-1"
               >
-                <ContactForm />
+                <div className="glass glow-box border-violet-200/50 dark:border-violet-500/30 rounded-2xl p-8 shadow-2xl">
+                  <div className="mb-8">
+                    <h3 className="text-2xl font-bold gradient-text mb-3">Send Me a Message</h3>
+                    <p className="text-gray-600 dark:text-gray-300">Fill out the form below and I'll get back to you as soon as possible.</p>
+                  </div>
+                  <ContactForm />
+                </div>
               </motion.div>
 
               {/* Contact Information */}
               <motion.div 
-                className="space-y-8"
+                className="space-y-8 order-1 lg:order-2"
                 initial={{ opacity: 0, x: 50 }}
                 whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <Card className="glass glow-box border-violet-200/50 dark:border-violet-500/30">
+                <Card className="glass glow-box border-violet-200/50 dark:border-violet-500/30 shadow-2xl">
                   <CardHeader>
-                    <CardTitle className="gradient-text flex items-center gap-2">
-                      <Mail className="h-5 w-5" />
-                      Other Ways to Connect
+                    <CardTitle className="gradient-text flex items-center gap-3 text-2xl font-bold">
+                      <Mail className="h-6 w-6" />
+                      Get In Touch
                     </CardTitle>
-                    <CardDescription>
-                      Prefer a different way to get in touch? Here are some alternatives.
+                    <CardDescription className="text-lg">
+                      Prefer a different way to connect? Here are some alternatives.
                     </CardDescription>
                   </CardHeader>
                   <CardContent className="space-y-6">
-                    <div 
-                      className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-950/30 dark:to-purple-950/30 transition-all duration-300 hover:from-violet-100 hover:to-purple-100 dark:hover:from-violet-900/30 dark:hover:to-purple-900/30 hover:scale-105 cursor-pointer group border border-violet-200/50 dark:border-violet-700/50"
+                    <motion.div 
+                      className="flex items-center gap-4 p-6 rounded-xl bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-950/30 dark:to-purple-950/30 transition-all duration-300 hover:from-violet-100 hover:to-purple-100 dark:hover:from-violet-900/30 dark:hover:to-purple-900/30 hover:scale-105 cursor-pointer group border border-violet-200/50 dark:border-violet-700/50 shadow-lg hover:shadow-xl"
                       onClick={() => window.location.href = 'mailto:kruhi7533@gmail.com?subject=Portfolio Inquiry&body=Hi Ruhi,%0D%0A%0D%0AI would like to connect with you regarding...'}
+                      whileHover={{ y: -2 }}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      <div className="bg-gradient-to-br from-violet-500 to-purple-600 p-3 rounded-xl shadow-lg group-hover:shadow-xl transition-shadow">
+                      <div className="bg-gradient-to-br from-violet-500 to-purple-600 p-4 rounded-xl shadow-lg group-hover:shadow-xl transition-shadow">
                         <Mail className="h-6 w-6 text-white" />
                       </div>
                       <div className="flex-1">
-                        <p className="font-semibold text-gray-900 dark:text-white">Direct Email</p>
-                        <p className="text-sm text-violet-600 dark:text-violet-400 font-medium">kruhi7533@gmail.com</p>
-                        <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">Click to compose email</p>
+                        <p className="font-bold text-gray-900 dark:text-white text-lg">Direct Email</p>
+                        <p className="text-violet-600 dark:text-violet-400 font-medium">kruhi7533@gmail.com</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">Click to compose email</p>
                       </div>
-                      <ExternalLink className="h-4 w-4 text-violet-600 dark:text-violet-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </div>
+                      <ExternalLink className="h-5 w-5 text-violet-600 dark:text-violet-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </motion.div>
                     
-                    <div 
-                      className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 transition-all duration-300 hover:from-blue-100 hover:to-indigo-100 dark:hover:from-blue-900/30 dark:hover:to-indigo-900/30 hover:scale-105 cursor-pointer group border border-blue-200/50 dark:border-blue-700/50"
+                    <motion.div 
+                      className="flex items-center gap-4 p-6 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 transition-all duration-300 hover:from-blue-100 hover:to-indigo-100 dark:hover:from-blue-900/30 dark:hover:to-indigo-900/30 hover:scale-105 cursor-pointer group border border-blue-200/50 dark:border-blue-700/50 shadow-lg hover:shadow-xl"
                       onClick={() => window.open('https://linkedin.com/in/ruhi-naaz-8b5960274/', '_blank')}
+                      whileHover={{ y: -2 }}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-3 rounded-xl shadow-lg group-hover:shadow-xl transition-shadow">
+                      <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-4 rounded-xl shadow-lg group-hover:shadow-xl transition-shadow">
                         <Linkedin className="h-6 w-6 text-white" />
                       </div>
                       <div className="flex-1">
-                        <p className="font-semibold text-gray-900 dark:text-white">LinkedIn</p>
-                        <p className="text-sm text-blue-600 dark:text-blue-400 font-medium">Professional Network</p>
-                        <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">Connect for professional opportunities</p>
+                        <p className="font-bold text-gray-900 dark:text-white text-lg">LinkedIn</p>
+                        <p className="text-blue-600 dark:text-blue-400 font-medium">Professional Network</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">Connect for professional opportunities</p>
                       </div>
-                      <ExternalLink className="h-4 w-4 text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </div>
+                      <ExternalLink className="h-5 w-5 text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </motion.div>
 
-                    <div 
-                      className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 transition-all duration-300 hover:from-emerald-100 hover:to-teal-100 dark:hover:from-emerald-900/30 dark:hover:to-teal-900/30 hover:scale-105 cursor-pointer group border border-emerald-200/50 dark:border-emerald-700/50"
+                    <motion.div 
+                      className="flex items-center gap-4 p-6 rounded-xl bg-gradient-to-r from-emerald-50 to-teal-50 dark:from-emerald-950/30 dark:to-teal-950/30 transition-all duration-300 hover:from-emerald-100 hover:to-teal-100 dark:hover:from-emerald-900/30 dark:hover:to-teal-900/30 hover:scale-105 cursor-pointer group border border-emerald-200/50 dark:border-emerald-700/50 shadow-lg hover:shadow-xl"
                       onClick={() => window.open('https://github.com/kruhi7533', '_blank')}
+                      whileHover={{ y: -2 }}
+                      whileTap={{ scale: 0.98 }}
                     >
-                      <div className="bg-gradient-to-br from-emerald-500 to-teal-600 p-3 rounded-xl shadow-lg group-hover:shadow-xl transition-shadow">
+                      <div className="bg-gradient-to-br from-emerald-500 to-teal-600 p-4 rounded-xl shadow-lg group-hover:shadow-xl transition-shadow">
                         <Github className="h-6 w-6 text-white" />
                       </div>
                       <div className="flex-1">
-                        <p className="font-semibold text-gray-900 dark:text-white">GitHub</p>
-                        <p className="text-sm text-emerald-600 dark:text-emerald-400 font-medium">View My Code</p>
-                        <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">Explore my projects and contributions</p>
+                        <p className="font-bold text-gray-900 dark:text-white text-lg">GitHub</p>
+                        <p className="text-emerald-600 dark:text-emerald-400 font-medium">View My Code</p>
+                        <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">Explore my projects and contributions</p>
                       </div>
-                      <ExternalLink className="h-4 w-4 text-emerald-600 dark:text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity" />
-                    </div>
-
-                    <div className="flex items-center gap-4 p-4 rounded-xl bg-gradient-to-r from-orange-50 to-red-50 dark:from-orange-950/30 dark:to-red-950/30 border border-orange-200/50 dark:border-orange-700/50">
-                      <div className="bg-gradient-to-br from-orange-500 to-red-600 p-3 rounded-xl shadow-lg">
-                        <Calendar className="h-6 w-6 text-white" />
-                      </div>
-                      <div className="flex-1">
-                        <p className="font-semibold text-gray-900 dark:text-white">Quick Response</p>
-                        <p className="text-sm text-orange-600 dark:text-orange-400 font-medium">Within 24 hours</p>
-                        <p className="text-xs text-gray-600 dark:text-gray-300 mt-1">I typically respond quickly during weekdays</p>
-                      </div>
-                    </div>
+                      <ExternalLink className="h-5 w-5 text-emerald-600 dark:text-emerald-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                    </motion.div>
                   </CardContent>
                 </Card>
 
-                <Card className="glass glow-box border-violet-200/50 dark:border-violet-500/30">
+                <Card className="glass glow-box border-violet-200/50 dark:border-violet-500/30 shadow-2xl">
                   <CardHeader>
-                    <CardTitle className="gradient-text">What to Expect</CardTitle>
+                    <CardTitle className="gradient-text text-xl font-bold">What to Expect</CardTitle>
                   </CardHeader>
-                  <CardContent className="space-y-4">
-                    <div className="flex items-start gap-3">
-                      <div className="bg-violet-500 rounded-full p-1 mt-1">
-                        <CheckCircle className="h-3 w-3 text-white" />
+                  <CardContent className="space-y-5">
+                    <div className="flex items-start gap-4">
+                      <div className="bg-violet-500 rounded-full p-2 mt-1 shadow-lg">
+                        <CheckCircle className="h-4 w-4 text-white" />
                       </div>
                       <div>
-                        <p className="font-medium text-gray-900 dark:text-white">Quick Response</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">I respond to all messages within 24 hours during weekdays</p>
+                        <p className="font-bold text-gray-900 dark:text-white">Quick Response</p>
+                        <p className="text-gray-600 dark:text-gray-300">I respond to all messages within 24 hours during weekdays</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <div className="bg-violet-500 rounded-full p-1 mt-1">
-                        <CheckCircle className="h-3 w-3 text-white" />
+                    <div className="flex items-start gap-4">
+                      <div className="bg-violet-500 rounded-full p-2 mt-1 shadow-lg">
+                        <CheckCircle className="h-4 w-4 text-white" />
                       </div>
                       <div>
-                        <p className="font-medium text-gray-900 dark:text-white">Detailed Discussion</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">We'll discuss your project requirements in detail</p>
+                        <p className="font-bold text-gray-900 dark:text-white">Detailed Discussion</p>
+                        <p className="text-gray-600 dark:text-gray-300">We'll discuss your project requirements in detail</p>
                       </div>
                     </div>
-                    <div className="flex items-start gap-3">
-                      <div className="bg-violet-500 rounded-full p-1 mt-1">
-                        <CheckCircle className="h-3 w-3 text-white" />
+                    <div className="flex items-start gap-4">
+                      <div className="bg-violet-500 rounded-full p-2 mt-1 shadow-lg">
+                        <CheckCircle className="h-4 w-4 text-white" />
                       </div>
                       <div>
-                        <p className="font-medium text-gray-900 dark:text-white">Free Consultation</p>
-                        <p className="text-sm text-gray-600 dark:text-gray-300">Initial project consultation is always free</p>
+                        <p className="font-bold text-gray-900 dark:text-white">Free Consultation</p>
+                        <p className="text-gray-600 dark:text-gray-300">Initial project consultation is always free</p>
                       </div>
                     </div>
                   </CardContent>
@@ -572,7 +596,7 @@ const Index = () => {
           
           <div className="max-w-4xl mx-auto text-center relative">
             <motion.h3 
-              className="text-3xl font-bold mb-4 bg-gradient-to-r from-white via-violet-200 to-purple-200 bg-clip-text text-transparent"
+              className="text-4xl font-black mb-4 bg-gradient-to-r from-white via-violet-200 to-purple-200 bg-clip-text text-transparent"
               initial={{ scale: 0.8 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
@@ -580,7 +604,7 @@ const Index = () => {
             >
               Ruhi Naaz
             </motion.h3>
-            <p className="text-gray-300 mb-10 text-lg">Full Stack Developer & UI/UX Designer</p>
+            <p className="text-gray-300 mb-10 text-xl font-medium">Full Stack Developer & UI/UX Designer</p>
             
             <motion.div 
               className="flex justify-center gap-8 mb-10"

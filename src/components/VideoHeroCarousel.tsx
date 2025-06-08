@@ -1,7 +1,7 @@
 
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Play, Pause, ArrowDown, Briefcase, Mail } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Play, Pause, ArrowDown, Briefcase, Mail, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -24,7 +24,6 @@ interface VideoHeroCarouselProps {
 const VideoHeroCarousel = ({ onScrollToSection }: VideoHeroCarouselProps) => {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isPlaying, setIsPlaying] = useState(true);
-  const [progress, setProgress] = useState(0);
   const videoRefs = useRef<(HTMLVideoElement | null)[]>([]);
   
   const slides: VideoSlide[] = [
@@ -61,17 +60,14 @@ const VideoHeroCarousel = ({ onScrollToSection }: VideoHeroCarouselProps) => {
 
   const nextSlide = () => {
     setCurrentSlide((prev) => (prev + 1) % slides.length);
-    setProgress(0);
   };
 
   const prevSlide = () => {
     setCurrentSlide((prev) => (prev - 1 + slides.length) % slides.length);
-    setProgress(0);
   };
 
   const goToSlide = (index: number) => {
     setCurrentSlide(index);
-    setProgress(0);
   };
 
   const togglePlayPause = () => {
@@ -101,14 +97,8 @@ const VideoHeroCarousel = ({ onScrollToSection }: VideoHeroCarouselProps) => {
     if (!isPlaying) return;
 
     const interval = setInterval(() => {
-      setProgress((prev) => {
-        if (prev >= 100) {
-          nextSlide();
-          return 0;
-        }
-        return prev + 1;
-      });
-    }, 50); // 5 seconds per slide
+      nextSlide();
+    }, 6000); // 6 seconds per slide
 
     return () => clearInterval(interval);
   }, [isPlaying, currentSlide]);
@@ -286,27 +276,34 @@ const VideoHeroCarousel = ({ onScrollToSection }: VideoHeroCarouselProps) => {
         </div>
       </div>
 
-      {/* Progress Bar */}
-      <div className="absolute bottom-0 left-0 w-full h-1 bg-white/20 z-20">
-        <motion.div
-          className="h-full bg-gradient-to-r from-violet-400 to-purple-500"
-          style={{ width: `${progress}%` }}
-          transition={{ duration: 0.1 }}
-        />
-      </div>
-
-      {/* Scroll Down Indicator */}
-      <motion.button
-        onClick={() => onScrollToSection('about')}
-        className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-20 text-white/80 hover:text-white transition-colors group"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
+      {/* Enhanced Scroll Down Indicator */}
+      <motion.div
+        className="absolute bottom-20 left-1/2 transform -translate-x-1/2 z-20"
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 1.5 }}
       >
-        <div className="flex flex-col items-center gap-2">
-          <span className="text-sm font-medium">Scroll to explore</span>
-          <ArrowDown className="w-6 h-6 group-hover:scale-110 transition-transform" />
-        </div>
-      </motion.button>
+        <motion.button
+          onClick={() => onScrollToSection('about')}
+          className="flex flex-col items-center gap-3 text-white/80 hover:text-white transition-colors group glass rounded-2xl px-6 py-4 border border-white/20 hover:border-white/30"
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          whileHover={{ scale: 1.05 }}
+          whileTap={{ scale: 0.95 }}
+        >
+          <div className="flex items-center gap-2">
+            <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform" />
+            <span className="text-sm font-semibold">Explore More</span>
+            <Sparkles className="w-4 h-4 group-hover:-rotate-12 transition-transform" />
+          </div>
+          <motion.div
+            animate={{ y: [0, 4, 0] }}
+            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
+          >
+            <ArrowDown className="w-5 h-5 group-hover:scale-110 transition-transform" />
+          </motion.div>
+        </motion.button>
+      </motion.div>
 
       {/* Contact Button - Floating */}
       <motion.div
@@ -319,7 +316,7 @@ const VideoHeroCarousel = ({ onScrollToSection }: VideoHeroCarouselProps) => {
           variant="outline"
           size="lg"
           onClick={() => onScrollToSection('contact')}
-          className="glass border-white/30 text-white hover:bg-white/10 backdrop-blur-md rotate-90 origin-center"
+          className="glass border-white/30 text-white hover:bg-white/10 backdrop-blur-md rotate-90 origin-center hover:scale-105 transition-all duration-300"
         >
           <Mail className="mr-2" size={18} />
           Contact
