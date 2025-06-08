@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -9,12 +8,11 @@ import SkillsProgress from "@/components/SkillsProgress";
 import BlogSection from "@/components/BlogSection";
 import BlogPage from "@/components/BlogPage";
 import ContactForm from "@/components/ContactForm";
-import CustomCursor from "@/components/CustomCursor";
 import AnimatedSection from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Github, ExternalLink, Calendar, Linkedin, Mail, Sparkles, CheckCircle } from "lucide-react";
+import { Github, ExternalLink, Calendar, Linkedin, Mail, Sparkles, CheckCircle, Star, Trophy, Zap } from "lucide-react";
 
 const Index = () => {
   const [currentView, setCurrentView] = useState<'portfolio' | 'blog'>('portfolio');
@@ -47,7 +45,6 @@ const Index = () => {
   if (currentView === 'blog') {
     return (
       <ThemeProvider>
-        <CustomCursor />
         <BlogPage onBack={showPortfolio} />
       </ThemeProvider>
     );
@@ -60,7 +57,8 @@ const Index = () => {
       image: "https://images.unsplash.com/photo-1569163139394-de4e4f43e4e3?w=500&h=300&fit=crop&auto=format&q=80",
       tags: ["React", "Chart.js", "Local Storage", "Environmental"],
       liveLink: "https://carbon-footprint-tracker-plum.vercel.app/",
-      githubLink: "https://github.com/kruhi7533"
+      githubLink: "https://github.com/kruhi7533",
+      featured: true
     },
     {
       title: "Task Manager Pro",
@@ -68,7 +66,8 @@ const Index = () => {
       image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=500&h=300&fit=crop&auto=format&q=80",
       tags: ["React", "TypeScript", "Local Storage", "Productivity"],
       liveLink: "https://taskmanager-eight-pi.vercel.app/",
-      githubLink: "https://github.com/kruhi7533"
+      githubLink: "https://github.com/kruhi7533",
+      featured: true
     },
     {
       title: "Pomodoro Timer",
@@ -98,16 +97,87 @@ const Index = () => {
 
   return (
     <ThemeProvider>
-      <CustomCursor />
       <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 dark:from-gray-950 dark:via-violet-950/20 dark:to-gray-900 relative overflow-hidden">
-        {/* Enhanced animated background elements */}
+        {/* Enhanced Floating Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div 
-            className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-violet-400/20 to-purple-600/20 rounded-full blur-3xl"
+            className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-violet-400/30 to-purple-600/30 rounded-full blur-3xl"
             animate={{ 
-              y: [0, -20, 0],
-              x: [0, 10, 0],
-              scale: [1, 1.1, 1]
+              y: [0, -30, 0],
+              x: [0, 20, 0],
+              scale: [1, 1.2, 1],
+              rotate: [0, 90, 0]
+            }}
+            transition={{
+              duration: 15,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div 
+            className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-br from-blue-400/30 to-cyan-600/30 rounded-full blur-3xl"
+            animate={{ 
+              y: [0, 30, 0],
+              x: [0, -20, 0],
+              scale: [1, 1.1, 1],
+              rotate: [0, -90, 0]
+            }}
+            transition={{
+              duration: 12,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2
+            }}
+          />
+          <motion.div 
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-br from-pink-400/20 to-violet-600/20 rounded-full blur-3xl"
+            animate={{ 
+              rotate: [0, 360],
+              scale: [1, 1.3, 1],
+              opacity: [0.3, 0.5, 0.3]
+            }}
+            transition={{
+              duration: 25,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
+          
+          {/* Enhanced Floating Particles */}
+          {[...Array(12)].map((_, i) => (
+            <motion.div
+              key={i}
+              className="absolute rounded-full"
+              style={{
+                width: `${4 + i % 3}px`,
+                height: `${4 + i % 3}px`,
+                backgroundColor: ['#8b5cf6', '#a855f7', '#06b6d4', '#ec4899'][i % 4],
+                top: `${15 + (i * 8) % 70}%`,
+                left: `${10 + (i * 7) % 80}%`,
+                opacity: 0.4
+              }}
+              animate={{
+                y: [0, -40, 0],
+                x: [0, Math.sin(i) * 20, 0],
+                opacity: [0.2, 0.8, 0.2],
+                scale: [0.8, 1.2, 0.8]
+              }}
+              transition={{
+                duration: 5 + i * 0.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.3,
+              }}
+            />
+          ))}
+
+          {/* Geometric Shapes */}
+          <motion.div
+            className="absolute top-20 right-20 w-16 h-16 border-2 border-violet-400/30 rotate-45"
+            animate={{
+              rotate: [45, 405],
+              scale: [1, 1.1, 1],
+              borderColor: ['rgba(139, 92, 246, 0.3)', 'rgba(168, 85, 247, 0.5)', 'rgba(139, 92, 246, 0.3)']
             }}
             transition={{
               duration: 8,
@@ -115,172 +185,181 @@ const Index = () => {
               ease: "easeInOut"
             }}
           />
-          <motion.div 
-            className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-cyan-600/20 rounded-full blur-3xl"
-            animate={{ 
-              y: [0, 20, 0],
-              x: [0, -10, 0],
-              scale: [1, 1.05, 1]
+          <motion.div
+            className="absolute bottom-32 left-16 w-20 h-20 border-2 border-cyan-400/30 rounded-full"
+            animate={{
+              scale: [1, 1.2, 1],
+              rotate: [0, 180, 360],
+              borderColor: ['rgba(6, 182, 212, 0.3)', 'rgba(34, 197, 94, 0.5)', 'rgba(6, 182, 212, 0.3)']
             }}
             transition={{
               duration: 10,
               repeat: Infinity,
               ease: "easeInOut",
-              delay: 2
+              delay: 1
             }}
           />
-          <motion.div 
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-pink-400/10 to-violet-600/10 rounded-full blur-3xl"
-            animate={{ 
-              rotate: [0, 360],
-              scale: [1, 1.2, 1]
-            }}
-            transition={{
-              duration: 20,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          />
-          
-          {/* Floating particles */}
-          {[...Array(6)].map((_, i) => (
-            <motion.div
-              key={i}
-              className={`absolute w-2 h-2 bg-violet-400/30 rounded-full`}
-              style={{
-                top: `${20 + i * 15}%`,
-                left: `${10 + i * 12}%`,
-              }}
-              animate={{
-                y: [0, -30, 0],
-                opacity: [0.3, 0.8, 0.3],
-              }}
-              transition={{
-                duration: 4 + i,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 0.5,
-              }}
-            />
-          ))}
         </div>
 
         <Navigation onShowBlog={showBlog} />
         
-        {/* Video Hero Carousel */}
-        <motion.div id="hero">
+        {/* Enhanced Video Hero Carousel */}
+        <motion.div 
+          id="hero"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 1 }}
+        >
           <VideoHeroCarousel onScrollToSection={scrollToSection} />
         </motion.div>
 
-        {/* Personal Section */}
+        {/* Personal Section with Enhanced Styling */}
         <AnimatedSection id="about" delay={0.1}>
-          <PersonalSection />
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-violet-500/5 via-transparent to-purple-500/5"></div>
+            <PersonalSection />
+          </div>
         </AnimatedSection>
 
-        {/* Skills Section */}
+        {/* Skills Section with Glow Effect */}
         <AnimatedSection delay={0.2}>
-          <SkillsProgress />
+          <div className="relative py-20">
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-violet-500/5 to-transparent"></div>
+            <SkillsProgress />
+          </div>
         </AnimatedSection>
 
-        {/* Projects Section */}
+        {/* Enhanced Projects Section */}
         <AnimatedSection id="projects" className="py-20 px-4 relative" delay={0.3}>
-          <div className="max-w-6xl mx-auto">
+          <div className="absolute inset-0 bg-gradient-to-br from-violet-50/50 via-purple-50/30 to-indigo-50/50 dark:from-violet-950/20 dark:via-purple-950/10 dark:to-indigo-950/20"></div>
+          <div className="max-w-6xl mx-auto relative">
             <motion.div 
-              className="text-center mb-16"
+              className="text-center mb-20"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
+              transition={{ duration: 0.8 }}
             >
-              <div className="flex items-center justify-center gap-2 mb-4">
+              <div className="flex items-center justify-center gap-3 mb-6">
                 <motion.div
                   animate={{ rotate: [0, 15, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  <Sparkles className="h-8 w-8 text-violet-600 dark:text-violet-400" />
+                  <Trophy className="h-10 w-10 text-violet-600 dark:text-violet-400" />
                 </motion.div>
-                <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 dark:from-violet-400 dark:via-purple-400 dark:to-indigo-400 bg-clip-text text-transparent">
+                <h2 className="text-5xl md:text-6xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 dark:from-violet-400 dark:via-purple-400 dark:to-indigo-400 bg-clip-text text-transparent">
                   Featured Projects
                 </h2>
                 <motion.div
                   animate={{ rotate: [0, -15, 0] }}
                   transition={{ duration: 2, repeat: Infinity, delay: 1 }}
                 >
-                  <Sparkles className="h-8 w-8 text-violet-600 dark:text-violet-400" />
+                  <Zap className="h-10 w-10 text-violet-600 dark:text-violet-400" />
                 </motion.div>
               </div>
-              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                Here are some of my recent projects that showcase my skills and creativity.
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Discover my latest creations that showcase innovation, creativity, and technical excellence in web development.
               </p>
+              <motion.div
+                className="mt-6 h-1 w-24 bg-gradient-to-r from-violet-500 to-purple-500 mx-auto rounded-full"
+                initial={{ width: 0 }}
+                whileInView={{ width: 96 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.5 }}
+              />
             </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {projects.map((project, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 50, rotate: -2 }}
+                  initial={{ opacity: 0, y: 60, rotate: -3 }}
                   whileInView={{ opacity: 1, y: 0, rotate: 0 }}
                   viewport={{ once: true }}
                   transition={{ 
-                    duration: 0.6, 
-                    delay: index * 0.1,
+                    duration: 0.8, 
+                    delay: index * 0.15,
                     ease: [0.25, 0.46, 0.45, 0.94]
                   }}
                   whileHover={{ 
-                    y: -10,
-                    rotate: 1,
+                    y: -15,
+                    rotate: index % 2 === 0 ? 2 : -2,
                     transition: { duration: 0.3 }
                   }}
+                  className={`group ${project.featured ? 'md:col-span-1 lg:col-span-1' : ''}`}
                 >
-                  <Card className="group hover:shadow-2xl transition-all duration-500 glass border-2 border-transparent bg-gradient-to-br from-white/80 to-white/40 dark:from-gray-900/80 dark:to-gray-800/40 backdrop-blur-xl hover:border-violet-300/50 dark:hover:border-violet-500/50 hover:shadow-violet-500/25 overflow-hidden">
+                  <Card className="group hover:shadow-2xl transition-all duration-700 glass border-2 border-transparent bg-gradient-to-br from-white/90 to-white/60 dark:from-gray-900/90 dark:to-gray-800/60 backdrop-blur-xl hover:border-violet-300/60 dark:hover:border-violet-500/60 hover:shadow-violet-500/30 overflow-hidden h-full relative">
+                    {project.featured && (
+                      <div className="absolute top-4 right-4 z-10">
+                        <Badge className="bg-gradient-to-r from-yellow-400 to-orange-400 text-black font-semibold border-0 shadow-lg">
+                          <Star className="h-3 w-3 mr-1" />
+                          Featured
+                        </Badge>
+                      </div>
+                    )}
+                    
                     <div className="relative overflow-hidden rounded-t-lg">
-                      <motion.img
-                        src={project.image}
-                        alt={project.title}
-                        className="w-full h-48 object-cover"
-                        whileHover={{ scale: 1.1 }}
-                        transition={{ duration: 0.4 }}
-                        onError={(e) => {
-                          e.currentTarget.src = "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=500&h=300&fit=crop&auto=format&q=80";
-                        }}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-violet-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <motion.div
+                        className="relative group-hover:scale-110 transition-transform duration-700"
+                      >
+                        <img
+                          src={project.image}
+                          alt={project.title}
+                          className="w-full h-52 object-cover"
+                          onError={(e) => {
+                            e.currentTarget.src = "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=500&h=300&fit=crop&auto=format&q=80";
+                          }}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-violet-900/70 via-purple-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                        <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      </motion.div>
                     </div>
-                    <CardHeader>
-                      <CardTitle className="text-xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 dark:from-violet-400 dark:to-purple-400 bg-clip-text text-transparent">
+                    
+                    <CardHeader className="pb-3">
+                      <CardTitle className="text-xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 dark:from-violet-400 dark:to-purple-400 bg-clip-text text-transparent group-hover:from-violet-500 group-hover:to-purple-500 transition-all duration-300">
                         {project.title}
                       </CardTitle>
-                      <CardDescription className="text-gray-600 dark:text-gray-300">
+                      <CardDescription className="text-gray-600 dark:text-gray-300 leading-relaxed">
                         {project.description}
                       </CardDescription>
                     </CardHeader>
-                    <CardContent>
-                      <div className="flex flex-wrap gap-2 mb-4">
+                    
+                    <CardContent className="pt-0">
+                      <div className="flex flex-wrap gap-2 mb-6">
                         {project.tags.map((tag, tagIndex) => (
                           <motion.div
                             key={tagIndex}
-                            whileHover={{ scale: 1.05 }}
+                            whileHover={{ scale: 1.1, rotate: 3 }}
                             whileTap={{ scale: 0.95 }}
                           >
-                            <Badge className="bg-gradient-to-r from-violet-100 to-purple-100 text-violet-800 dark:from-violet-900/50 dark:to-purple-900/50 dark:text-violet-200 border border-violet-200 dark:border-violet-700">
+                            <Badge className="bg-gradient-to-r from-violet-100 to-purple-100 text-violet-800 dark:from-violet-900/60 dark:to-purple-900/60 dark:text-violet-200 border border-violet-200 dark:border-violet-700 hover:shadow-md transition-all duration-300">
                               {tag}
                             </Badge>
                           </motion.div>
                         ))}
                       </div>
+                      
                       <div className="flex gap-3">
-                        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="flex-1">
-                          <Button size="sm" asChild className="w-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                        <motion.div 
+                          whileHover={{ scale: 1.05 }} 
+                          whileTap={{ scale: 0.95 }} 
+                          className="flex-1"
+                        >
+                          <Button size="sm" asChild className="w-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 border-0 shadow-lg hover:shadow-xl transition-all duration-300 group/btn">
                             <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
-                              <ExternalLink className="h-4 w-4 mr-2" />
+                              <ExternalLink className="h-4 w-4 mr-2 group-hover/btn:rotate-12 transition-transform" />
                               Live Demo
                             </a>
                           </Button>
                         </motion.div>
-                        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="flex-1">
-                          <Button size="sm" variant="outline" asChild className="w-full border-2 border-violet-300 text-violet-700 hover:bg-violet-50 dark:border-violet-600 dark:text-violet-300 dark:hover:bg-violet-900/20">
+                        <motion.div 
+                          whileHover={{ scale: 1.05 }} 
+                          whileTap={{ scale: 0.95 }} 
+                          className="flex-1"
+                        >
+                          <Button size="sm" variant="outline" asChild className="w-full border-2 border-violet-300 text-violet-700 hover:bg-violet-50 dark:border-violet-600 dark:text-violet-300 dark:hover:bg-violet-900/20 group/btn">
                             <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
-                              <Github className="h-4 w-4 mr-2" />
+                              <Github className="h-4 w-4 mr-2 group-hover/btn:rotate-12 transition-transform" />
                               Code
                             </a>
                           </Button>
@@ -294,30 +373,64 @@ const Index = () => {
           </div>
         </AnimatedSection>
 
-        {/* Blog Section */}
+        {/* Blog Section with Enhanced Animation */}
         <AnimatedSection delay={0.4}>
-          <BlogSection onShowBlog={showBlog} />
+          <div className="relative">
+            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-transparent to-violet-500/5"></div>
+            <BlogSection onShowBlog={showBlog} />
+          </div>
         </AnimatedSection>
 
-        {/* Contact Section */}
-        <AnimatedSection id="contact" className="py-20 px-4 bg-gradient-to-br from-violet-100/50 via-purple-50/50 to-blue-100/50 dark:from-violet-950/30 dark:via-purple-950/20 dark:to-blue-950/30 relative" delay={0.5}>
-          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-violet-500/5 to-transparent"></div>
-          <div className="max-w-4xl mx-auto relative">
-            <div className="text-center mb-16 animate-fade-in">
-              <h2 className="text-4xl font-bold mb-4 gradient-text">
-                Let's Work Together
+        {/* Enhanced Contact Section */}
+        <AnimatedSection id="contact" className="py-24 px-4 bg-gradient-to-br from-violet-100/60 via-purple-50/60 to-blue-100/60 dark:from-violet-950/40 dark:via-purple-950/30 dark:to-blue-950/40 relative" delay={0.5}>
+          <div className="absolute inset-0 bg-gradient-to-r from-transparent via-violet-500/10 to-transparent"></div>
+          <div className="absolute inset-0">
+            <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-violet-400/20 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-purple-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+          </div>
+          
+          <div className="max-w-5xl mx-auto relative">
+            <motion.div 
+              className="text-center mb-20"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+            >
+              <h2 className="text-5xl md:text-6xl font-bold mb-6 bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 dark:from-violet-400 dark:via-purple-400 dark:to-indigo-400 bg-clip-text text-transparent">
+                Let's Create Something Amazing
               </h2>
-              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
-                Have a project in mind? I'd love to hear about it and discuss how we can bring your ideas to life.
+              <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed">
+                Ready to bring your vision to life? Let's collaborate and build extraordinary digital experiences together.
               </p>
-            </div>
+              <motion.div
+                className="mt-6 h-1 w-32 bg-gradient-to-r from-violet-500 to-purple-500 mx-auto rounded-full"
+                initial={{ width: 0 }}
+                whileInView={{ width: 128 }}
+                viewport={{ once: true }}
+                transition={{ duration: 1, delay: 0.5 }}
+              />
+            </motion.div>
 
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
               {/* Contact Form */}
-              <ContactForm />
+              <motion.div
+                initial={{ opacity: 0, x: -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.2 }}
+              >
+                <ContactForm />
+              </motion.div>
 
               {/* Contact Information */}
-              <div className="space-y-8 animate-slide-in-left" style={{ animationDelay: '0.2s' }}>
+              <motion.div 
+                className="space-y-8"
+                initial={{ opacity: 0, x: 50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, delay: 0.4 }}
+              >
                 <Card className="glass glow-box border-violet-200/50 dark:border-violet-500/30">
                   <CardHeader>
                     <CardTitle className="gradient-text flex items-center gap-2">
@@ -421,37 +534,94 @@ const Index = () => {
                     </div>
                   </CardContent>
                 </Card>
-              </div>
+              </motion.div>
             </div>
           </div>
         </AnimatedSection>
 
-        {/* Footer */}
+        {/* Enhanced Footer */}
         <motion.footer 
-          className="bg-gradient-to-r from-gray-900 via-violet-900 to-gray-900 dark:from-black dark:via-violet-950 dark:to-black text-white py-12 px-4 relative overflow-hidden"
+          className="bg-gradient-to-r from-gray-900 via-violet-900 to-gray-900 dark:from-black dark:via-violet-950 dark:to-black text-white py-16 px-4 relative overflow-hidden"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
+          transition={{ duration: 0.8 }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-violet-600/10 via-purple-600/10 to-blue-600/10"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-violet-600/20 via-purple-600/20 to-blue-600/20"></div>
+          <div className="absolute inset-0">
+            {[...Array(8)].map((_, i) => (
+              <motion.div
+                key={i}
+                className="absolute w-1 h-1 bg-white/20 rounded-full"
+                style={{
+                  top: `${Math.random() * 100}%`,
+                  left: `${Math.random() * 100}%`,
+                }}
+                animate={{
+                  opacity: [0.2, 1, 0.2],
+                  scale: [0.5, 1, 0.5]
+                }}
+                transition={{
+                  duration: 3,
+                  repeat: Infinity,
+                  delay: i * 0.5
+                }}
+              />
+            ))}
+          </div>
+          
           <div className="max-w-4xl mx-auto text-center relative">
-            <h3 className="text-2xl font-bold mb-4 gradient-text text-white">Ruhi Naaz</h3>
-            <p className="text-gray-300 mb-8">Full Stack Developer & UI/UX Designer</p>
-            <div className="flex justify-center gap-6 mb-8">
-              <a href="https://github.com/kruhi7533" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-violet-400 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
-                <Github className="h-6 w-6" />
-              </a>
-              <a href="https://linkedin.com/in/ruhi-naaz-8b5960274/" target="_blank" rel="noopener noreferrer" className="text-gray-400 hover:text-violet-400 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
-                <Linkedin className="h-6 w-6" />
-              </a>
-              <a href="mailto:kruhi7533@gmail.com" className="text-gray-400 hover:text-violet-400 transition-all duration-300 transform hover:scale-110 hover:rotate-12">
-                <Mail className="h-6 w-6" />
-              </a>
-            </div>
-            <div className="border-t border-gray-700 pt-8">
-              <p className="text-gray-400">
-                © 2024 Ruhi Naaz. All rights reserved. Built with React & Tailwind CSS.
+            <motion.h3 
+              className="text-3xl font-bold mb-4 bg-gradient-to-r from-white via-violet-200 to-purple-200 bg-clip-text text-transparent"
+              initial={{ scale: 0.8 }}
+              whileInView={{ scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
+              Ruhi Naaz
+            </motion.h3>
+            <p className="text-gray-300 mb-10 text-lg">Full Stack Developer & UI/UX Designer</p>
+            
+            <motion.div 
+              className="flex justify-center gap-8 mb-10"
+              initial={{ y: 20, opacity: 0 }}
+              whileInView={{ y: 0, opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+            >
+              <motion.a 
+                href="https://github.com/kruhi7533" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-400 hover:text-violet-400 transition-all duration-300 transform hover:scale-125 p-3 rounded-full hover:bg-violet-500/20"
+                whileHover={{ rotate: 15 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Github className="h-7 w-7" />
+              </motion.a>
+              <motion.a 
+                href="https://linkedin.com/in/ruhi-naaz-8b5960274/" 
+                target="_blank" 
+                rel="noopener noreferrer" 
+                className="text-gray-400 hover:text-violet-400 transition-all duration-300 transform hover:scale-125 p-3 rounded-full hover:bg-violet-500/20"
+                whileHover={{ rotate: -15 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Linkedin className="h-7 w-7" />
+              </motion.a>
+              <motion.a 
+                href="mailto:kruhi7533@gmail.com" 
+                className="text-gray-400 hover:text-violet-400 transition-all duration-300 transform hover:scale-125 p-3 rounded-full hover:bg-violet-500/20"
+                whileHover={{ rotate: 15 }}
+                whileTap={{ scale: 0.9 }}
+              >
+                <Mail className="h-7 w-7" />
+              </motion.a>
+            </motion.div>
+            
+            <div className="border-t border-gray-700/50 pt-8">
+              <p className="text-gray-400 text-lg">
+                © 2024 Ruhi Naaz. Crafted with ❤️ using React & Tailwind CSS.
               </p>
             </div>
           </div>
