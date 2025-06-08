@@ -1,8 +1,9 @@
+
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import Navigation from "@/components/Navigation";
-import HeroSection from "@/components/HeroSection";
+import VideoHeroCarousel from "@/components/VideoHeroCarousel";
 import PersonalSection from "@/components/PersonalSection";
 import SkillsProgress from "@/components/SkillsProgress";
 import BlogSection from "@/components/BlogSection";
@@ -166,9 +167,9 @@ const Index = () => {
 
         <Navigation onShowBlog={showBlog} />
         
-        {/* Hero Section */}
+        {/* Video Hero Carousel */}
         <motion.div id="hero">
-          <HeroSection onScrollToSection={scrollToSection} />
+          <VideoHeroCarousel onScrollToSection={scrollToSection} />
         </motion.div>
 
         {/* Personal Section */}
