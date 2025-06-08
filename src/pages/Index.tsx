@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { motion } from "framer-motion";
 import { ThemeProvider } from "@/contexts/ThemeContext";
 import Navigation from "@/components/Navigation";
 import HeroSection from "@/components/HeroSection";
@@ -7,6 +8,8 @@ import SkillsProgress from "@/components/SkillsProgress";
 import BlogSection from "@/components/BlogSection";
 import BlogPage from "@/components/BlogPage";
 import ContactForm from "@/components/ContactForm";
+import CustomCursor from "@/components/CustomCursor";
+import AnimatedSection from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -43,6 +46,7 @@ const Index = () => {
   if (currentView === 'blog') {
     return (
       <ThemeProvider>
+        <CustomCursor />
         <BlogPage onBack={showPortfolio} />
       </ThemeProvider>
     );
@@ -93,105 +97,209 @@ const Index = () => {
 
   return (
     <ThemeProvider>
+      <CustomCursor />
       <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 dark:from-gray-950 dark:via-violet-950/20 dark:to-gray-900 relative overflow-hidden">
-        {/* Animated background elements */}
+        {/* Enhanced animated background elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
-          <div className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-violet-400/20 to-purple-600/20 rounded-full blur-3xl animate-float"></div>
-          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-cyan-600/20 rounded-full blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
-          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-pink-400/10 to-violet-600/10 rounded-full blur-3xl animate-pulse"></div>
+          <motion.div 
+            className="absolute -top-40 -right-40 w-80 h-80 bg-gradient-to-br from-violet-400/20 to-purple-600/20 rounded-full blur-3xl"
+            animate={{ 
+              y: [0, -20, 0],
+              x: [0, 10, 0],
+              scale: [1, 1.1, 1]
+            }}
+            transition={{
+              duration: 8,
+              repeat: Infinity,
+              ease: "easeInOut"
+            }}
+          />
+          <motion.div 
+            className="absolute -bottom-40 -left-40 w-80 h-80 bg-gradient-to-br from-blue-400/20 to-cyan-600/20 rounded-full blur-3xl"
+            animate={{ 
+              y: [0, 20, 0],
+              x: [0, -10, 0],
+              scale: [1, 1.05, 1]
+            }}
+            transition={{
+              duration: 10,
+              repeat: Infinity,
+              ease: "easeInOut",
+              delay: 2
+            }}
+          />
+          <motion.div 
+            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-gradient-to-br from-pink-400/10 to-violet-600/10 rounded-full blur-3xl"
+            animate={{ 
+              rotate: [0, 360],
+              scale: [1, 1.2, 1]
+            }}
+            transition={{
+              duration: 20,
+              repeat: Infinity,
+              ease: "linear"
+            }}
+          />
           
-          {/* Additional floating particles */}
-          <div className="absolute top-20 left-20 w-4 h-4 bg-violet-400/30 rounded-full animate-float" style={{ animationDelay: '1s' }}></div>
-          <div className="absolute top-60 right-32 w-6 h-6 bg-purple-400/30 rounded-full animate-float" style={{ animationDelay: '3s' }}></div>
-          <div className="absolute bottom-32 left-1/3 w-3 h-3 bg-blue-400/30 rounded-full animate-float" style={{ animationDelay: '0.5s' }}></div>
+          {/* Floating particles */}
+          {[...Array(6)].map((_, i) => (
+            <motion.div
+              key={i}
+              className={`absolute w-2 h-2 bg-violet-400/30 rounded-full`}
+              style={{
+                top: `${20 + i * 15}%`,
+                left: `${10 + i * 12}%`,
+              }}
+              animate={{
+                y: [0, -30, 0],
+                opacity: [0.3, 0.8, 0.3],
+              }}
+              transition={{
+                duration: 4 + i,
+                repeat: Infinity,
+                ease: "easeInOut",
+                delay: i * 0.5,
+              }}
+            />
+          ))}
         </div>
 
         <Navigation onShowBlog={showBlog} />
         
         {/* Hero Section */}
-        <HeroSection onScrollToSection={scrollToSection} />
+        <motion.div id="hero">
+          <HeroSection onScrollToSection={scrollToSection} />
+        </motion.div>
 
         {/* Personal Section */}
-        <PersonalSection />
+        <AnimatedSection id="about" delay={0.1}>
+          <PersonalSection />
+        </AnimatedSection>
 
         {/* Skills Section */}
-        <SkillsProgress />
+        <AnimatedSection delay={0.2}>
+          <SkillsProgress />
+        </AnimatedSection>
 
         {/* Projects Section */}
-        <section id="projects" className="py-20 px-4 relative">
+        <AnimatedSection id="projects" className="py-20 px-4 relative" delay={0.3}>
           <div className="max-w-6xl mx-auto">
-            <div className="text-center mb-16 animate-fade-in">
+            <motion.div 
+              className="text-center mb-16"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+            >
               <div className="flex items-center justify-center gap-2 mb-4">
-                <Sparkles className="h-8 w-8 text-violet-600 dark:text-violet-400 animate-pulse" />
-                <h2 className="text-4xl font-bold gradient-text">
+                <motion.div
+                  animate={{ rotate: [0, 15, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <Sparkles className="h-8 w-8 text-violet-600 dark:text-violet-400" />
+                </motion.div>
+                <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 dark:from-violet-400 dark:via-purple-400 dark:to-indigo-400 bg-clip-text text-transparent">
                   Featured Projects
                 </h2>
-                <Sparkles className="h-8 w-8 text-violet-600 dark:text-violet-400 animate-pulse" />
+                <motion.div
+                  animate={{ rotate: [0, -15, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                >
+                  <Sparkles className="h-8 w-8 text-violet-600 dark:text-violet-400" />
+                </motion.div>
               </div>
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-2xl mx-auto">
                 Here are some of my recent projects that showcase my skills and creativity.
               </p>
-            </div>
+            </motion.div>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
               {projects.map((project, index) => (
-                <Card 
-                  key={index} 
-                  className="group hover:shadow-2xl transition-all duration-500 hover:scale-105 animate-slide-in-left glass glow-box border-violet-200/50 dark:border-violet-500/30 backdrop-blur-sm"
-                  style={{ animationDelay: `${index * 0.1}s` }}
+                <motion.div
+                  key={index}
+                  initial={{ opacity: 0, y: 50, rotate: -2 }}
+                  whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ 
+                    duration: 0.6, 
+                    delay: index * 0.1,
+                    ease: [0.25, 0.46, 0.45, 0.94]
+                  }}
+                  whileHover={{ 
+                    y: -10,
+                    rotate: 1,
+                    transition: { duration: 0.3 }
+                  }}
                 >
-                  <div className="relative overflow-hidden rounded-t-lg">
-                    <img
-                      src={project.image}
-                      alt={project.title}
-                      className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500"
-                      onError={(e) => {
-                        console.info(`Failed to load image for ${project.title}: ${project.image}`);
-                        e.currentTarget.src = "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=500&h=300&fit=crop&auto=format&q=80";
-                      }}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-violet-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                  </div>
-                  <CardHeader>
-                    <CardTitle className="text-xl font-bold gradient-text">{project.title}</CardTitle>
-                    <CardDescription className="text-gray-600 dark:text-gray-300">
-                      {project.description}
-                    </CardDescription>
-                  </CardHeader>
-                  <CardContent>
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {project.tags.map((tag, tagIndex) => (
-                        <Badge key={tagIndex} className="bg-violet-100 text-violet-800 dark:bg-violet-900/50 dark:text-violet-200 border-violet-200 dark:border-violet-700">
-                          {tag}
-                        </Badge>
-                      ))}
+                  <Card className="group hover:shadow-2xl transition-all duration-500 glass border-2 border-transparent bg-gradient-to-br from-white/80 to-white/40 dark:from-gray-900/80 dark:to-gray-800/40 backdrop-blur-xl hover:border-violet-300/50 dark:hover:border-violet-500/50 hover:shadow-violet-500/25 overflow-hidden">
+                    <div className="relative overflow-hidden rounded-t-lg">
+                      <motion.img
+                        src={project.image}
+                        alt={project.title}
+                        className="w-full h-48 object-cover"
+                        whileHover={{ scale: 1.1 }}
+                        transition={{ duration: 0.4 }}
+                        onError={(e) => {
+                          e.currentTarget.src = "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=500&h=300&fit=crop&auto=format&q=80";
+                        }}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-violet-900/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                     </div>
-                    <div className="flex gap-3">
-                      <Button size="sm" asChild className="flex-1 btn-primary bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700">
-                        <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
-                          <ExternalLink className="h-4 w-4 mr-2" />
-                          Live Demo
-                        </a>
-                      </Button>
-                      <Button size="sm" variant="outline" asChild className="flex-1 border-violet-300 text-violet-700 hover:bg-violet-50 dark:border-violet-600 dark:text-violet-300 dark:hover:bg-violet-900/20">
-                        <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
-                          <Github className="h-4 w-4 mr-2" />
-                          Code
-                        </a>
-                      </Button>
-                    </div>
-                  </CardContent>
-                </Card>
+                    <CardHeader>
+                      <CardTitle className="text-xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 dark:from-violet-400 dark:to-purple-400 bg-clip-text text-transparent">
+                        {project.title}
+                      </CardTitle>
+                      <CardDescription className="text-gray-600 dark:text-gray-300">
+                        {project.description}
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-wrap gap-2 mb-4">
+                        {project.tags.map((tag, tagIndex) => (
+                          <motion.div
+                            key={tagIndex}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
+                          >
+                            <Badge className="bg-gradient-to-r from-violet-100 to-purple-100 text-violet-800 dark:from-violet-900/50 dark:to-purple-900/50 dark:text-violet-200 border border-violet-200 dark:border-violet-700">
+                              {tag}
+                            </Badge>
+                          </motion.div>
+                        ))}
+                      </div>
+                      <div className="flex gap-3">
+                        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="flex-1">
+                          <Button size="sm" asChild className="w-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 border-0 shadow-lg hover:shadow-xl transition-all duration-300">
+                            <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
+                              <ExternalLink className="h-4 w-4 mr-2" />
+                              Live Demo
+                            </a>
+                          </Button>
+                        </motion.div>
+                        <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} className="flex-1">
+                          <Button size="sm" variant="outline" asChild className="w-full border-2 border-violet-300 text-violet-700 hover:bg-violet-50 dark:border-violet-600 dark:text-violet-300 dark:hover:bg-violet-900/20">
+                            <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
+                              <Github className="h-4 w-4 mr-2" />
+                              Code
+                            </a>
+                          </Button>
+                        </motion.div>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
               ))}
             </div>
           </div>
-        </section>
+        </AnimatedSection>
 
         {/* Blog Section */}
-        <BlogSection onShowBlog={showBlog} />
+        <AnimatedSection delay={0.4}>
+          <BlogSection onShowBlog={showBlog} />
+        </AnimatedSection>
 
         {/* Contact Section */}
-        <section id="contact" className="py-20 px-4 bg-gradient-to-br from-violet-100/50 via-purple-50/50 to-blue-100/50 dark:from-violet-950/30 dark:via-purple-950/20 dark:to-blue-950/30 relative">
+        <AnimatedSection id="contact" className="py-20 px-4 bg-gradient-to-br from-violet-100/50 via-purple-50/50 to-blue-100/50 dark:from-violet-950/30 dark:via-purple-950/20 dark:to-blue-950/30 relative" delay={0.5}>
           <div className="absolute inset-0 bg-gradient-to-r from-transparent via-violet-500/5 to-transparent"></div>
           <div className="max-w-4xl mx-auto relative">
             <div className="text-center mb-16 animate-fade-in">
@@ -315,10 +423,16 @@ const Index = () => {
               </div>
             </div>
           </div>
-        </section>
+        </AnimatedSection>
 
         {/* Footer */}
-        <footer className="bg-gradient-to-r from-gray-900 via-violet-900 to-gray-900 dark:from-black dark:via-violet-950 dark:to-black text-white py-12 px-4 relative overflow-hidden">
+        <motion.footer 
+          className="bg-gradient-to-r from-gray-900 via-violet-900 to-gray-900 dark:from-black dark:via-violet-950 dark:to-black text-white py-12 px-4 relative overflow-hidden"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+        >
           <div className="absolute inset-0 bg-gradient-to-r from-violet-600/10 via-purple-600/10 to-blue-600/10"></div>
           <div className="max-w-4xl mx-auto text-center relative">
             <h3 className="text-2xl font-bold mb-4 gradient-text text-white">Ruhi Naaz</h3>
@@ -340,7 +454,7 @@ const Index = () => {
               </p>
             </div>
           </div>
-        </footer>
+        </motion.footer>
       </div>
     </ThemeProvider>
   );
