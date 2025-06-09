@@ -1,4 +1,3 @@
-
 import { useState } from "react";
 import { motion } from "framer-motion";
 import { ThemeProvider } from "@/contexts/ThemeContext";
@@ -98,11 +97,11 @@ const Index = () => {
 
   return (
     <ThemeProvider>
-      <div className="min-h-screen bg-gradient-to-br from-violet-50 via-purple-50 to-indigo-50 dark:from-gray-950 dark:via-violet-950/20 dark:to-gray-900 relative overflow-hidden">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-indigo-50 to-purple-50 dark:from-gray-950 dark:via-blue-950/30 dark:to-purple-950/30 relative overflow-hidden">
         {/* Enhanced Floating Background Elements */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <motion.div 
-            className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-violet-400/30 to-purple-600/30 rounded-full blur-3xl"
+            className="absolute -top-40 -right-40 w-96 h-96 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full blur-3xl"
             animate={{ 
               y: [0, -30, 0],
               x: [0, 20, 0],
@@ -116,7 +115,7 @@ const Index = () => {
             }}
           />
           <motion.div 
-            className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-br from-blue-400/30 to-cyan-600/30 rounded-full blur-3xl"
+            className="absolute -bottom-40 -left-40 w-96 h-96 bg-gradient-to-br from-indigo-400/20 to-cyan-600/20 rounded-full blur-3xl"
             animate={{ 
               y: [0, 30, 0],
               x: [0, -20, 0],
@@ -128,89 +127,6 @@ const Index = () => {
               repeat: Infinity,
               ease: "easeInOut",
               delay: 2
-            }}
-          />
-          <motion.div 
-            className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[500px] h-[500px] bg-gradient-to-br from-pink-400/20 to-violet-600/20 rounded-full blur-3xl"
-            animate={{ 
-              rotate: [0, 360],
-              scale: [1, 1.3, 1],
-              opacity: [0.3, 0.5, 0.3]
-            }}
-            transition={{
-              duration: 25,
-              repeat: Infinity,
-              ease: "linear"
-            }}
-          />
-          
-          {/* Enhanced Floating Images/Particles */}
-          {[...Array(15)].map((_, i) => (
-            <motion.div
-              key={i}
-              className="absolute"
-              style={{
-                top: `${15 + (i * 6) % 70}%`,
-                left: `${10 + (i * 8) % 80}%`,
-              }}
-              animate={{
-                y: [0, -60, 0],
-                x: [0, Math.sin(i) * 30, 0],
-                rotate: [0, 360],
-                scale: [0.8, 1.3, 0.8]
-              }}
-              transition={{
-                duration: 8 + i * 0.5,
-                repeat: Infinity,
-                ease: "easeInOut",
-                delay: i * 0.4,
-              }}
-            >
-              {i % 4 === 0 && (
-                <div className="w-8 h-8 bg-gradient-to-br from-violet-400/60 to-purple-600/60 rounded-full blur-sm" />
-              )}
-              {i % 4 === 1 && (
-                <div className="w-6 h-6 bg-gradient-to-br from-cyan-400/60 to-blue-600/60 rounded-lg blur-sm rotate-45" />
-              )}
-              {i % 4 === 2 && (
-                <div className="w-5 h-5 bg-gradient-to-br from-pink-400/60 to-rose-600/60 rounded-full blur-sm" />
-              )}
-              {i % 4 === 3 && (
-                <img 
-                  src="https://images.unsplash.com/photo-1517077304055-6e89abbf09b0?w=40&h=40&fit=crop&auto=format&q=80" 
-                  alt=""
-                  className="w-12 h-12 rounded-full opacity-40 blur-[1px]"
-                />
-              )}
-            </motion.div>
-          ))}
-
-          {/* Geometric Shapes */}
-          <motion.div
-            className="absolute top-20 right-20 w-16 h-16 border-2 border-violet-400/30 rotate-45"
-            animate={{
-              rotate: [45, 405],
-              scale: [1, 1.1, 1],
-              borderColor: ['rgba(139, 92, 246, 0.3)', 'rgba(168, 85, 247, 0.5)', 'rgba(139, 92, 246, 0.3)']
-            }}
-            transition={{
-              duration: 8,
-              repeat: Infinity,
-              ease: "easeInOut"
-            }}
-          />
-          <motion.div
-            className="absolute bottom-32 left-16 w-20 h-20 border-2 border-cyan-400/30 rounded-full"
-            animate={{
-              scale: [1, 1.2, 1],
-              rotate: [0, 180, 360],
-              borderColor: ['rgba(6, 182, 212, 0.3)', 'rgba(34, 197, 94, 0.5)', 'rgba(6, 182, 212, 0.3)']
-            }}
-            transition={{
-              duration: 10,
-              repeat: Infinity,
-              ease: "easeInOut",
-              delay: 1
             }}
           />
         </div>
@@ -230,7 +146,7 @@ const Index = () => {
         {/* Personal Section with Enhanced Styling */}
         <AnimatedSection id="about" delay={0.1}>
           <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-violet-500/5 via-transparent to-purple-500/5"></div>
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500/5 via-transparent to-purple-500/5"></div>
             <PersonalSection />
           </div>
         </AnimatedSection>
@@ -238,14 +154,14 @@ const Index = () => {
         {/* Skills Section with Glow Effect */}
         <AnimatedSection delay={0.2}>
           <div className="relative py-20">
-            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-violet-500/5 to-transparent"></div>
+            <div className="absolute inset-0 bg-gradient-to-b from-transparent via-blue-500/5 to-transparent"></div>
             <SkillsProgress />
           </div>
         </AnimatedSection>
 
         {/* Enhanced Projects Section */}
         <AnimatedSection id="projects" className="py-20 px-4 relative" delay={0.3}>
-          <div className="absolute inset-0 bg-gradient-to-br from-violet-50/50 via-purple-50/30 to-indigo-50/50 dark:from-violet-950/20 dark:via-purple-950/10 dark:to-indigo-950/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50/50 via-purple-50/30 to-indigo-50/50 dark:from-blue-950/20 dark:via-purple-950/10 dark:to-indigo-950/20"></div>
           <div className="max-w-6xl mx-auto relative">
             <motion.div 
               className="text-center mb-20"
@@ -259,23 +175,23 @@ const Index = () => {
                   animate={{ rotate: [0, 15, 0] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  <Trophy className="h-10 w-10 text-violet-600 dark:text-violet-400" />
+                  <Trophy className="h-10 w-10 text-blue-600 dark:text-blue-400" />
                 </motion.div>
-                <h2 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 dark:from-violet-300 dark:via-purple-300 dark:to-indigo-300 bg-clip-text text-transparent drop-shadow-2xl">
+                <h2 className="text-5xl md:text-7xl font-black gradient-text drop-shadow-2xl">
                   Featured Projects
                 </h2>
                 <motion.div
                   animate={{ rotate: [0, -15, 0] }}
                   transition={{ duration: 2, repeat: Infinity, delay: 1 }}
                 >
-                  <Zap className="h-10 w-10 text-violet-600 dark:text-violet-400" />
+                  <Zap className="h-10 w-10 text-blue-600 dark:text-blue-400" />
                 </motion.div>
               </div>
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
                 Discover my latest creations that showcase innovation, creativity, and technical excellence in web development.
               </p>
               <motion.div
-                className="mt-6 h-1 w-24 bg-gradient-to-r from-violet-500 to-purple-500 mx-auto rounded-full"
+                className="mt-6 h-1 w-24 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"
                 initial={{ width: 0 }}
                 whileInView={{ width: 96 }}
                 viewport={{ once: true }}
@@ -303,7 +219,7 @@ const Index = () => {
                   className={`group ${project.featured ? 'md:col-span-1 lg:col-span-1' : ''}`}
                 >
                   <Card className={`group transition-all duration-700 glass border-2 border-transparent bg-gradient-to-br from-white/90 to-white/60 dark:from-gray-900/90 dark:to-gray-800/60 backdrop-blur-xl overflow-hidden h-full relative ${
-                    project.featured ? 'hover:shadow-2xl hover:border-violet-300/60 dark:hover:border-violet-500/60 hover:shadow-violet-500/30' : ''
+                    project.featured ? 'hover:shadow-2xl hover:border-blue-300/60 dark:hover:border-purple-500/60 hover:shadow-blue-500/30 dark:hover:shadow-purple-500/30' : ''
                   }`}>
                     {project.featured && (
                       <div className="absolute top-4 right-4 z-10">
@@ -328,16 +244,16 @@ const Index = () => {
                         />
                         {project.featured && (
                           <>
-                            <div className="absolute inset-0 bg-gradient-to-t from-violet-900/70 via-purple-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
-                            <div className="absolute inset-0 bg-gradient-to-br from-violet-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            <div className="absolute inset-0 bg-gradient-to-t from-blue-900/70 via-purple-600/20 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                            <div className="absolute inset-0 bg-gradient-to-br from-blue-500/20 to-purple-500/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                           </>
                         )}
                       </motion.div>
                     </div>
                     
                     <CardHeader className="pb-3">
-                      <CardTitle className={`text-xl font-bold bg-gradient-to-r from-violet-600 to-purple-600 dark:from-violet-400 dark:to-purple-400 bg-clip-text text-transparent ${
-                        project.featured ? 'group-hover:from-violet-500 group-hover:to-purple-500 transition-all duration-300' : ''
+                      <CardTitle className={`text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent ${
+                        project.featured ? 'group-hover:from-blue-500 group-hover:to-purple-500 transition-all duration-300' : ''
                       }`}>
                         {project.title}
                       </CardTitle>
@@ -354,7 +270,7 @@ const Index = () => {
                             whileHover={project.featured ? { scale: 1.1, rotate: 3 } : {}}
                             whileTap={project.featured ? { scale: 0.95 } : {}}
                           >
-                            <Badge className="bg-gradient-to-r from-violet-100 to-purple-100 text-violet-800 dark:from-violet-900/60 dark:to-purple-900/60 dark:text-violet-200 border border-violet-200 dark:border-violet-700 hover:shadow-md transition-all duration-300">
+                            <Badge className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 dark:from-blue-900/60 dark:to-purple-900/60 dark:text-blue-200 border border-blue-200 dark:border-blue-700 hover:shadow-md transition-all duration-300">
                               {tag}
                             </Badge>
                           </motion.div>
@@ -367,7 +283,7 @@ const Index = () => {
                           whileTap={{ scale: 0.95 }} 
                           className="flex-1"
                         >
-                          <Button size="sm" asChild className="w-full bg-gradient-to-r from-violet-600 to-purple-600 hover:from-violet-700 hover:to-purple-700 border-0 shadow-lg hover:shadow-xl transition-all duration-300 group/btn">
+                          <Button size="sm" asChild className="w-full bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 border-0 shadow-lg hover:shadow-xl transition-all duration-300 group/btn">
                             <a href={project.liveLink} target="_blank" rel="noopener noreferrer">
                               <ExternalLink className="h-4 w-4 mr-2 group-hover/btn:rotate-12 transition-transform" />
                               Live Demo
@@ -379,7 +295,7 @@ const Index = () => {
                           whileTap={{ scale: 0.95 }} 
                           className="flex-1"
                         >
-                          <Button size="sm" variant="outline" asChild className="w-full border-2 border-violet-300 text-violet-700 hover:bg-violet-50 dark:border-violet-600 dark:text-violet-300 dark:hover:bg-violet-900/20 group/btn">
+                          <Button size="sm" variant="outline" asChild className="w-full border-2 border-blue-300 text-blue-700 hover:bg-blue-50 dark:border-purple-600 dark:text-purple-300 dark:hover:bg-purple-900/20 group/btn">
                             <a href={project.githubLink} target="_blank" rel="noopener noreferrer">
                               <Github className="h-4 w-4 mr-2 group-hover/btn:rotate-12 transition-transform" />
                               Code
@@ -414,7 +330,7 @@ const Index = () => {
                   >
                     <BookOpen className="h-10 w-10 text-emerald-600 dark:text-emerald-400" />
                   </motion.div>
-                  <h2 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 dark:from-emerald-300 dark:via-teal-300 dark:to-cyan-300 bg-clip-text text-transparent drop-shadow-2xl">
+                  <h2 className="text-5xl md:text-7xl font-black gradient-text drop-shadow-2xl">
                     Currently Learning
                   </h2>
                   <motion.div
@@ -549,9 +465,9 @@ const Index = () => {
 
         {/* Enhanced Contact Section */}
         <AnimatedSection id="contact" className="py-24 px-4 relative" delay={0.5}>
-          <div className="absolute inset-0 bg-gradient-to-br from-violet-900/10 via-purple-900/5 to-blue-900/10 dark:from-violet-950/40 dark:via-purple-950/30 dark:to-blue-950/40"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-900/10 via-purple-900/5 to-indigo-900/10 dark:from-blue-950/40 dark:via-purple-950/30 dark:to-indigo-950/40"></div>
           <div className="absolute inset-0">
-            <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-violet-400/20 rounded-full blur-3xl animate-pulse"></div>
+            <div className="absolute top-1/4 left-1/4 w-32 h-32 bg-blue-400/20 rounded-full blur-3xl animate-pulse"></div>
             <div className="absolute bottom-1/4 right-1/4 w-40 h-40 bg-purple-400/20 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
           </div>
           
@@ -563,14 +479,14 @@ const Index = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-5xl md:text-7xl font-black mb-6 bg-gradient-to-r from-violet-600 via-purple-600 to-indigo-600 dark:from-violet-300 dark:via-purple-300 dark:to-indigo-300 bg-clip-text text-transparent drop-shadow-2xl">
+              <h2 className="text-5xl md:text-7xl font-black mb-6 gradient-text drop-shadow-2xl">
                 Let's Create Something Amazing
               </h2>
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
                 Ready to bring your vision to life? Let's collaborate and build extraordinary digital experiences together.
               </p>
               <motion.div
-                className="mt-6 h-1 w-32 bg-gradient-to-r from-violet-500 to-purple-500 mx-auto rounded-full"
+                className="mt-6 h-1 w-32 bg-gradient-to-r from-blue-500 to-purple-500 mx-auto rounded-full"
                 initial={{ width: 0 }}
                 whileInView={{ width: 128 }}
                 viewport={{ once: true }}
@@ -587,7 +503,7 @@ const Index = () => {
                 transition={{ duration: 0.8, delay: 0.2 }}
                 className="order-2 lg:order-1"
               >
-                <div className="glass glow-box border-violet-200/50 dark:border-violet-500/30 rounded-2xl p-8 shadow-2xl">
+                <div className="glass glow-box border-blue-200/50 dark:border-purple-500/30 rounded-2xl p-8 shadow-2xl">
                   <div className="mb-8">
                     <h3 className="text-2xl font-bold gradient-text mb-3">Send Me a Message</h3>
                     <p className="text-gray-600 dark:text-gray-300">Fill out the form below and I'll get back to you as soon as possible.</p>
@@ -604,7 +520,7 @@ const Index = () => {
                 viewport={{ once: true }}
                 transition={{ duration: 0.8, delay: 0.4 }}
               >
-                <Card className="glass glow-box border-violet-200/50 dark:border-violet-500/30 shadow-2xl">
+                <Card className="glass glow-box border-blue-200/50 dark:border-purple-500/30 shadow-2xl">
                   <CardHeader>
                     <CardTitle className="gradient-text flex items-center gap-3 text-2xl font-bold">
                       <Mail className="h-6 w-6" />
@@ -616,37 +532,37 @@ const Index = () => {
                   </CardHeader>
                   <CardContent className="space-y-6">
                     <motion.div 
-                      className="flex items-center gap-4 p-6 rounded-xl bg-gradient-to-r from-violet-50 to-purple-50 dark:from-violet-950/30 dark:to-purple-950/30 transition-all duration-300 hover:from-violet-100 hover:to-purple-100 dark:hover:from-violet-900/30 dark:hover:to-purple-900/30 hover:scale-105 cursor-pointer group border border-violet-200/50 dark:border-violet-700/50 shadow-lg hover:shadow-xl"
+                      className="flex items-center gap-4 p-6 rounded-xl bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-950/30 dark:to-purple-950/30 transition-all duration-300 hover:from-blue-100 hover:to-purple-100 dark:hover:from-blue-900/30 dark:hover:to-purple-900/30 hover:scale-105 cursor-pointer group border border-blue-200/50 dark:border-purple-700/50 shadow-lg hover:shadow-xl"
                       onClick={() => window.location.href = 'mailto:kruhi7533@gmail.com?subject=Portfolio Inquiry&body=Hi Ruhi,%0D%0A%0D%0AI would like to connect with you regarding...'}
                       whileHover={{ y: -2 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <div className="bg-gradient-to-br from-violet-500 to-purple-600 p-4 rounded-xl shadow-lg group-hover:shadow-xl transition-shadow">
+                      <div className="bg-gradient-to-br from-blue-500 to-purple-600 p-4 rounded-xl shadow-lg group-hover:shadow-xl transition-shadow">
                         <Mail className="h-6 w-6 text-white" />
                       </div>
                       <div className="flex-1">
                         <p className="font-bold text-gray-900 dark:text-white text-lg">Direct Email</p>
-                        <p className="text-violet-600 dark:text-violet-400 font-medium">kruhi7533@gmail.com</p>
+                        <p className="text-blue-600 dark:text-purple-400 font-medium">kruhi7533@gmail.com</p>
                         <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">Click to compose email</p>
                       </div>
-                      <ExternalLink className="h-5 w-5 text-violet-600 dark:text-violet-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <ExternalLink className="h-5 w-5 text-blue-600 dark:text-purple-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </motion.div>
                     
                     <motion.div 
-                      className="flex items-center gap-4 p-6 rounded-xl bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 transition-all duration-300 hover:from-blue-100 hover:to-indigo-100 dark:hover:from-blue-900/30 dark:hover:to-indigo-900/30 hover:scale-105 cursor-pointer group border border-blue-200/50 dark:border-blue-700/50 shadow-lg hover:shadow-xl"
+                      className="flex items-center gap-4 p-6 rounded-xl bg-gradient-to-r from-indigo-50 to-blue-50 dark:from-indigo-950/30 dark:to-blue-950/30 transition-all duration-300 hover:from-indigo-100 hover:to-blue-100 dark:hover:from-indigo-900/30 dark:hover:to-blue-900/30 hover:scale-105 cursor-pointer group border border-indigo-200/50 dark:border-blue-700/50 shadow-lg hover:shadow-xl"
                       onClick={() => window.open('https://linkedin.com/in/ruhi-naaz-8b5960274/', '_blank')}
                       whileHover={{ y: -2 }}
                       whileTap={{ scale: 0.98 }}
                     >
-                      <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-4 rounded-xl shadow-lg group-hover:shadow-xl transition-shadow">
+                      <div className="bg-gradient-to-br from-indigo-500 to-blue-600 p-4 rounded-xl shadow-lg group-hover:shadow-xl transition-shadow">
                         <Linkedin className="h-6 w-6 text-white" />
                       </div>
                       <div className="flex-1">
                         <p className="font-bold text-gray-900 dark:text-white text-lg">LinkedIn</p>
-                        <p className="text-blue-600 dark:text-blue-400 font-medium">Professional Network</p>
+                        <p className="text-indigo-600 dark:text-blue-400 font-medium">Professional Network</p>
                         <p className="text-sm text-gray-600 dark:text-gray-300 mt-1">Connect for professional opportunities</p>
                       </div>
-                      <ExternalLink className="h-5 w-5 text-blue-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity" />
+                      <ExternalLink className="h-5 w-5 text-indigo-600 dark:text-blue-400 opacity-0 group-hover:opacity-100 transition-opacity" />
                     </motion.div>
 
                     <motion.div 
@@ -668,13 +584,13 @@ const Index = () => {
                   </CardContent>
                 </Card>
 
-                <Card className="glass glow-box border-violet-200/50 dark:border-violet-500/30 shadow-2xl">
+                <Card className="glass glow-box border-blue-200/50 dark:border-purple-500/30 shadow-2xl">
                   <CardHeader>
                     <CardTitle className="gradient-text text-xl font-bold">What to Expect</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-5">
                     <div className="flex items-start gap-4">
-                      <div className="bg-violet-500 rounded-full p-2 mt-1 shadow-lg">
+                      <div className="bg-blue-500 rounded-full p-2 mt-1 shadow-lg">
                         <CheckCircle className="h-4 w-4 text-white" />
                       </div>
                       <div>
@@ -683,7 +599,7 @@ const Index = () => {
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
-                      <div className="bg-violet-500 rounded-full p-2 mt-1 shadow-lg">
+                      <div className="bg-blue-500 rounded-full p-2 mt-1 shadow-lg">
                         <CheckCircle className="h-4 w-4 text-white" />
                       </div>
                       <div>
@@ -692,7 +608,7 @@ const Index = () => {
                       </div>
                     </div>
                     <div className="flex items-start gap-4">
-                      <div className="bg-violet-500 rounded-full p-2 mt-1 shadow-lg">
+                      <div className="bg-blue-500 rounded-full p-2 mt-1 shadow-lg">
                         <CheckCircle className="h-4 w-4 text-white" />
                       </div>
                       <div>
@@ -709,13 +625,13 @@ const Index = () => {
 
         {/* Enhanced Footer */}
         <motion.footer 
-          className="bg-gradient-to-r from-gray-900 via-violet-900 to-gray-900 dark:from-black dark:via-violet-950 dark:to-black text-white py-16 px-4 relative overflow-hidden"
+          className="bg-gradient-to-r from-gray-900 via-blue-900 to-gray-900 dark:from-black dark:via-blue-950 dark:to-black text-white py-16 px-4 relative overflow-hidden"
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          <div className="absolute inset-0 bg-gradient-to-r from-violet-600/20 via-purple-600/20 to-blue-600/20"></div>
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-600/20 via-purple-600/20 to-indigo-600/20"></div>
           <div className="absolute inset-0">
             {[...Array(8)].map((_, i) => (
               <motion.div
@@ -740,7 +656,7 @@ const Index = () => {
           
           <div className="max-w-4xl mx-auto text-center relative">
             <motion.h3 
-              className="text-4xl font-black mb-4 bg-gradient-to-r from-white via-violet-200 to-purple-200 bg-clip-text text-transparent"
+              className="text-4xl font-black mb-4 gradient-text"
               initial={{ scale: 0.8 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
@@ -761,7 +677,7 @@ const Index = () => {
                 href="https://github.com/kruhi7533" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-gray-400 hover:text-violet-400 transition-all duration-300 transform hover:scale-125 p-3 rounded-full hover:bg-violet-500/20"
+                className="text-gray-400 hover:text-blue-400 transition-all duration-300 transform hover:scale-125 p-3 rounded-full hover:bg-blue-500/20"
                 whileHover={{ rotate: 15 }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -771,7 +687,7 @@ const Index = () => {
                 href="https://linkedin.com/in/ruhi-naaz-8b5960274/" 
                 target="_blank" 
                 rel="noopener noreferrer" 
-                className="text-gray-400 hover:text-violet-400 transition-all duration-300 transform hover:scale-125 p-3 rounded-full hover:bg-violet-500/20"
+                className="text-gray-400 hover:text-blue-400 transition-all duration-300 transform hover:scale-125 p-3 rounded-full hover:bg-blue-500/20"
                 whileHover={{ rotate: -15 }}
                 whileTap={{ scale: 0.9 }}
               >
@@ -779,7 +695,7 @@ const Index = () => {
               </motion.a>
               <motion.a 
                 href="mailto:kruhi7533@gmail.com" 
-                className="text-gray-400 hover:text-violet-400 transition-all duration-300 transform hover:scale-125 p-3 rounded-full hover:bg-violet-500/20"
+                className="text-gray-400 hover:text-blue-400 transition-all duration-300 transform hover:scale-125 p-3 rounded-full hover:bg-blue-500/20"
                 whileHover={{ rotate: 15 }}
                 whileTap={{ scale: 0.9 }}
               >
