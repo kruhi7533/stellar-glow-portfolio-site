@@ -13,7 +13,7 @@ import AnimatedSection from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Github, ExternalLink, Calendar, Linkedin, Mail, Sparkles, CheckCircle, Star, Trophy, Zap, Phone, MapPin, Clock } from "lucide-react";
+import { Github, ExternalLink, Calendar, Linkedin, Mail, Sparkles, CheckCircle, Star, Trophy, Zap, Phone, MapPin, Clock, BookOpen, Code, TrendingUp, Target } from "lucide-react";
 
 const Index = () => {
   const [currentView, setCurrentView] = useState<'portfolio' | 'blog'>('portfolio');
@@ -395,11 +395,155 @@ const Index = () => {
           </div>
         </AnimatedSection>
 
-        {/* Blog Section with Enhanced Animation */}
-        <AnimatedSection delay={0.4}>
-          <div className="relative">
-            <div className="absolute inset-0 bg-gradient-to-r from-purple-500/5 via-transparent to-violet-500/5"></div>
-            <BlogSection onShowBlog={showBlog} />
+        {/* Currently Learning Section */}
+        <AnimatedSection id="learning" delay={0.4}>
+          <div className="py-24 px-4 relative">
+            <div className="absolute inset-0 bg-gradient-to-br from-emerald-50/50 via-teal-50/30 to-cyan-50/50 dark:from-emerald-950/20 dark:via-teal-950/10 dark:to-cyan-950/20"></div>
+            <div className="max-w-6xl mx-auto relative">
+              <motion.div 
+                className="text-center mb-20"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="flex items-center justify-center gap-3 mb-6">
+                  <motion.div
+                    animate={{ rotate: [0, 15, 0] }}
+                    transition={{ duration: 2, repeat: Infinity }}
+                  >
+                    <BookOpen className="h-10 w-10 text-emerald-600 dark:text-emerald-400" />
+                  </motion.div>
+                  <h2 className="text-5xl md:text-7xl font-black bg-gradient-to-r from-emerald-600 via-teal-600 to-cyan-600 dark:from-emerald-300 dark:via-teal-300 dark:to-cyan-300 bg-clip-text text-transparent drop-shadow-2xl">
+                    Currently Learning
+                  </h2>
+                  <motion.div
+                    animate={{ rotate: [0, -15, 0] }}
+                    transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                  >
+                    <TrendingUp className="h-10 w-10 text-emerald-600 dark:text-emerald-400" />
+                  </motion.div>
+                </div>
+                <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
+                  Constantly evolving and expanding my skillset to stay at the forefront of technology.
+                </p>
+                <motion.div
+                  className="mt-6 h-1 w-32 bg-gradient-to-r from-emerald-500 to-teal-500 mx-auto rounded-full"
+                  initial={{ width: 0 }}
+                  whileInView={{ width: 128 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 1, delay: 0.5 }}
+                />
+              </motion.div>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <motion.div
+                  initial={{ opacity: 0, x: -50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.2 }}
+                >
+                  <Card className="glass glow-box border-emerald-200/50 dark:border-emerald-500/30 shadow-2xl hover:shadow-emerald-500/20 transition-all duration-500 group">
+                    <CardHeader>
+                      <div className="flex items-center gap-4">
+                        <div className="bg-gradient-to-br from-blue-500 to-indigo-600 p-4 rounded-xl shadow-lg group-hover:shadow-xl transition-shadow">
+                          <Code className="h-8 w-8 text-white" />
+                        </div>
+                        <div>
+                          <CardTitle className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-indigo-600 dark:from-blue-400 dark:to-indigo-400 bg-clip-text text-transparent">
+                            Data Science
+                          </CardTitle>
+                          <CardDescription className="text-lg text-gray-600 dark:text-gray-300">
+                            Advanced Analytics & Machine Learning
+                          </CardDescription>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                        Diving deep into data analysis, statistical modeling, and machine learning algorithms to extract meaningful insights from complex datasets.
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        <Badge className="bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 dark:from-blue-900/60 dark:to-indigo-900/60 dark:text-blue-200">
+                          Pandas
+                        </Badge>
+                        <Badge className="bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 dark:from-blue-900/60 dark:to-indigo-900/60 dark:text-blue-200">
+                          NumPy
+                        </Badge>
+                        <Badge className="bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 dark:from-blue-900/60 dark:to-indigo-900/60 dark:text-blue-200">
+                          Scikit-learn
+                        </Badge>
+                        <Badge className="bg-gradient-to-r from-blue-100 to-indigo-100 text-blue-800 dark:from-blue-900/60 dark:to-indigo-900/60 dark:text-blue-200">
+                          Matplotlib
+                        </Badge>
+                      </div>
+                      <div className="bg-gradient-to-r from-blue-50 to-indigo-50 dark:from-blue-950/30 dark:to-indigo-950/30 p-4 rounded-lg border border-blue-200/50 dark:border-blue-700/50">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Target className="h-4 w-4 text-blue-600 dark:text-blue-400" />
+                          <span className="font-semibold text-blue-800 dark:text-blue-200">Current Focus</span>
+                        </div>
+                        <p className="text-sm text-blue-700 dark:text-blue-300">
+                          Working on predictive modeling and data visualization projects
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+
+                <motion.div
+                  initial={{ opacity: 0, x: 50 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ duration: 0.8, delay: 0.4 }}
+                >
+                  <Card className="glass glow-box border-emerald-200/50 dark:border-emerald-500/30 shadow-2xl hover:shadow-emerald-500/20 transition-all duration-500 group">
+                    <CardHeader>
+                      <div className="flex items-center gap-4">
+                        <div className="bg-gradient-to-br from-yellow-500 to-orange-600 p-4 rounded-xl shadow-lg group-hover:shadow-xl transition-shadow">
+                          <Code className="h-8 w-8 text-white" />
+                        </div>
+                        <div>
+                          <CardTitle className="text-2xl font-bold bg-gradient-to-r from-yellow-600 to-orange-600 dark:from-yellow-400 dark:to-orange-400 bg-clip-text text-transparent">
+                            Python
+                          </CardTitle>
+                          <CardDescription className="text-lg text-gray-600 dark:text-gray-300">
+                            Backend Development & Automation
+                          </CardDescription>
+                        </div>
+                      </div>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <p className="text-gray-600 dark:text-gray-300 leading-relaxed">
+                        Mastering Python for backend development, automation scripts, and integrating with web applications for full-stack solutions.
+                      </p>
+                      <div className="flex flex-wrap gap-2">
+                        <Badge className="bg-gradient-to-r from-yellow-100 to-orange-100 text-yellow-800 dark:from-yellow-900/60 dark:to-orange-900/60 dark:text-yellow-200">
+                          Django
+                        </Badge>
+                        <Badge className="bg-gradient-to-r from-yellow-100 to-orange-100 text-yellow-800 dark:from-yellow-900/60 dark:to-orange-900/60 dark:text-yellow-200">
+                          FastAPI
+                        </Badge>
+                        <Badge className="bg-gradient-to-r from-yellow-100 to-orange-100 text-yellow-800 dark:from-yellow-900/60 dark:to-orange-900/60 dark:text-yellow-200">
+                          APIs
+                        </Badge>
+                        <Badge className="bg-gradient-to-r from-yellow-100 to-orange-100 text-yellow-800 dark:from-yellow-900/60 dark:to-orange-900/60 dark:text-yellow-200">
+                          Automation
+                        </Badge>
+                      </div>
+                      <div className="bg-gradient-to-r from-yellow-50 to-orange-50 dark:from-yellow-950/30 dark:to-orange-950/30 p-4 rounded-lg border border-yellow-200/50 dark:border-yellow-700/50">
+                        <div className="flex items-center gap-2 mb-2">
+                          <Target className="h-4 w-4 text-yellow-600 dark:text-yellow-400" />
+                          <span className="font-semibold text-yellow-800 dark:text-yellow-200">Current Focus</span>
+                        </div>
+                        <p className="text-sm text-yellow-700 dark:text-yellow-300">
+                          Building REST APIs and exploring machine learning integration
+                        </p>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              </div>
+            </div>
           </div>
         </AnimatedSection>
 
