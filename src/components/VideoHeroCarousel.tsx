@@ -1,7 +1,6 @@
-
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { ChevronLeft, ChevronRight, Play, Pause, ArrowDown, Briefcase, Mail, Sparkles } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Play, Pause, ArrowDown, Briefcase, Mail, MousePointer2, Sparkles } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 
@@ -285,23 +284,76 @@ const VideoHeroCarousel = ({ onScrollToSection }: VideoHeroCarouselProps) => {
       >
         <motion.button
           onClick={() => onScrollToSection('about')}
-          className="flex flex-col items-center gap-3 text-white/80 hover:text-white transition-colors group glass rounded-2xl px-6 py-4 border border-white/20 hover:border-white/30"
-          animate={{ y: [0, 8, 0] }}
-          transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          className="group relative overflow-hidden"
           whileHover={{ scale: 1.05 }}
           whileTap={{ scale: 0.95 }}
         >
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 group-hover:rotate-12 transition-transform" />
-            <span className="text-sm font-semibold">Explore More</span>
-            <Sparkles className="w-4 h-4 group-hover:-rotate-12 transition-transform" />
+          {/* Main Button Container */}
+          <div className="relative bg-gradient-to-r from-violet-600/80 via-purple-600/80 to-indigo-600/80 backdrop-blur-xl border border-white/30 rounded-2xl px-8 py-6 shadow-2xl hover:shadow-violet-500/30 transition-all duration-500">
+            {/* Animated Background Gradient */}
+            <div className="absolute inset-0 bg-gradient-to-r from-violet-500/20 via-purple-500/20 to-indigo-500/20 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+            
+            {/* Content */}
+            <div className="relative flex flex-col items-center gap-4 text-white">
+              {/* Top Icon and Text */}
+              <div className="flex items-center gap-3">
+                <motion.div
+                  animate={{ rotate: [0, 15, 0] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                >
+                  <Sparkles className="w-5 h-5 text-yellow-300 group-hover:text-yellow-200 transition-colors" />
+                </motion.div>
+                <span className="text-lg font-bold tracking-wide group-hover:text-violet-100 transition-colors">
+                  Discover More
+                </span>
+                <motion.div
+                  animate={{ rotate: [0, -15, 0] }}
+                  transition={{ duration: 2, repeat: Infinity, delay: 1 }}
+                >
+                  <Sparkles className="w-5 h-5 text-yellow-300 group-hover:text-yellow-200 transition-colors" />
+                </motion.div>
+              </div>
+              
+              {/* Animated Arrow */}
+              <motion.div
+                animate={{ y: [0, 8, 0] }}
+                transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+                className="flex items-center gap-2"
+              >
+                <ArrowDown className="w-6 h-6 group-hover:scale-110 transition-transform" />
+                <motion.div
+                  animate={{ scale: [1, 1.2, 1], opacity: [0.5, 1, 0.5] }}
+                  transition={{ duration: 1.5, repeat: Infinity, delay: 0.5 }}
+                  className="w-2 h-2 bg-white rounded-full"
+                />
+              </motion.div>
+              
+              {/* Subtitle */}
+              <span className="text-sm font-medium text-violet-100 opacity-90 group-hover:opacity-100 transition-opacity">
+                Scroll to explore my journey
+              </span>
+            </div>
+            
+            {/* Floating Particles */}
+            <motion.div
+              className="absolute -top-2 -left-2 w-4 h-4 bg-gradient-to-r from-yellow-400 to-orange-400 rounded-full opacity-60"
+              animate={{
+                y: [0, -10, 0],
+                x: [0, 5, 0],
+                scale: [0.8, 1.2, 0.8]
+              }}
+              transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+            />
+            <motion.div
+              className="absolute -bottom-2 -right-2 w-3 h-3 bg-gradient-to-r from-pink-400 to-purple-400 rounded-full opacity-60"
+              animate={{
+                y: [0, 8, 0],
+                x: [0, -3, 0],
+                scale: [1, 0.7, 1]
+              }}
+              transition={{ duration: 2.5, repeat: Infinity, ease: "easeInOut", delay: 1 }}
+            />
           </div>
-          <motion.div
-            animate={{ y: [0, 4, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: 0.5 }}
-          >
-            <ArrowDown className="w-5 h-5 group-hover:scale-110 transition-transform" />
-          </motion.div>
         </motion.button>
       </motion.div>
 
