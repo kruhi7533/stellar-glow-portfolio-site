@@ -177,7 +177,7 @@ const Index = () => {
                 >
                   <Trophy className="h-10 w-10 text-blue-600 dark:text-blue-400" />
                 </motion.div>
-                <h2 className="text-5xl md:text-7xl font-black gradient-text drop-shadow-2xl">
+                <h2 className="text-5xl md:text-7xl font-black text-blue-600 dark:text-blue-300 drop-shadow-2xl">
                   Featured Projects
                 </h2>
                 <motion.div
@@ -203,19 +203,18 @@ const Index = () => {
               {projects.map((project, index) => (
                 <motion.div
                   key={index}
-                  initial={{ opacity: 0, y: 60, rotate: -3 }}
-                  whileInView={{ opacity: 1, y: 0, rotate: 0 }}
+                  initial={{ opacity: 0, y: 60 }}
+                  whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true }}
                   transition={{ 
                     duration: 0.8, 
                     delay: index * 0.15,
                     ease: [0.25, 0.46, 0.45, 0.94]
                   }}
-                  whileHover={project.featured ? { 
-                    y: -15,
-                    rotate: index % 2 === 0 ? 2 : -2,
+                  whileHover={{ 
+                    y: -8,
                     transition: { duration: 0.3 }
-                  } : {}}
+                  }}
                   className={`group ${project.featured ? 'md:col-span-1 lg:col-span-1' : ''}`}
                 >
                   <Card className={`group transition-all duration-700 glass border-2 border-transparent bg-gradient-to-br from-white/90 to-white/60 dark:from-gray-900/90 dark:to-gray-800/60 backdrop-blur-xl overflow-hidden h-full relative ${
@@ -232,7 +231,7 @@ const Index = () => {
                     
                     <div className="relative overflow-hidden rounded-t-lg">
                       <motion.div
-                        className={`relative ${project.featured ? 'group-hover:scale-110 transition-transform duration-700' : ''}`}
+                        className={`relative ${project.featured ? 'group-hover:scale-105 transition-transform duration-700' : ''}`}
                       >
                         <img
                           src={project.image}
@@ -267,8 +266,8 @@ const Index = () => {
                         {project.tags.map((tag, tagIndex) => (
                           <motion.div
                             key={tagIndex}
-                            whileHover={project.featured ? { scale: 1.1, rotate: 3 } : {}}
-                            whileTap={project.featured ? { scale: 0.95 } : {}}
+                            whileHover={{ scale: 1.05 }}
+                            whileTap={{ scale: 0.95 }}
                           >
                             <Badge className="bg-gradient-to-r from-blue-100 to-purple-100 text-blue-800 dark:from-blue-900/60 dark:to-purple-900/60 dark:text-blue-200 border border-blue-200 dark:border-blue-700 hover:shadow-md transition-all duration-300">
                               {tag}
@@ -330,7 +329,7 @@ const Index = () => {
                   >
                     <BookOpen className="h-10 w-10 text-emerald-600 dark:text-emerald-400" />
                   </motion.div>
-                  <h2 className="text-5xl md:text-7xl font-black gradient-text drop-shadow-2xl">
+                  <h2 className="text-5xl md:text-7xl font-black text-emerald-600 dark:text-emerald-300 drop-shadow-2xl">
                     Currently Learning
                   </h2>
                   <motion.div
@@ -479,7 +478,7 @@ const Index = () => {
               viewport={{ once: true }}
               transition={{ duration: 0.8 }}
             >
-              <h2 className="text-5xl md:text-7xl font-black mb-6 gradient-text drop-shadow-2xl">
+              <h2 className="text-5xl md:text-7xl font-black mb-6 text-blue-600 dark:text-blue-300 drop-shadow-2xl">
                 Let's Create Something Amazing
               </h2>
               <p className="text-xl text-gray-600 dark:text-gray-300 max-w-3xl mx-auto leading-relaxed font-medium">
@@ -505,7 +504,7 @@ const Index = () => {
               >
                 <div className="glass glow-box border-blue-200/50 dark:border-purple-500/30 rounded-2xl p-8 shadow-2xl">
                   <div className="mb-8">
-                    <h3 className="text-2xl font-bold gradient-text mb-3">Send Me a Message</h3>
+                    <h3 className="text-2xl font-bold text-blue-600 dark:text-blue-300 mb-3">Send Me a Message</h3>
                     <p className="text-gray-600 dark:text-gray-300">Fill out the form below and I'll get back to you as soon as possible.</p>
                   </div>
                   <ContactForm />
@@ -522,7 +521,7 @@ const Index = () => {
               >
                 <Card className="glass glow-box border-blue-200/50 dark:border-purple-500/30 shadow-2xl">
                   <CardHeader>
-                    <CardTitle className="gradient-text flex items-center gap-3 text-2xl font-bold">
+                    <CardTitle className="text-blue-600 dark:text-blue-300 flex items-center gap-3 text-2xl font-bold">
                       <Mail className="h-6 w-6" />
                       Get In Touch
                     </CardTitle>
@@ -586,7 +585,7 @@ const Index = () => {
 
                 <Card className="glass glow-box border-blue-200/50 dark:border-purple-500/30 shadow-2xl">
                   <CardHeader>
-                    <CardTitle className="gradient-text text-xl font-bold">What to Expect</CardTitle>
+                    <CardTitle className="text-blue-600 dark:text-blue-300 text-xl font-bold">What to Expect</CardTitle>
                   </CardHeader>
                   <CardContent className="space-y-5">
                     <div className="flex items-start gap-4">
@@ -656,7 +655,7 @@ const Index = () => {
           
           <div className="max-w-4xl mx-auto text-center relative">
             <motion.h3 
-              className="text-4xl font-black mb-4 gradient-text"
+              className="text-4xl font-black mb-4 text-blue-300"
               initial={{ scale: 0.8 }}
               whileInView={{ scale: 1 }}
               viewport={{ once: true }}
